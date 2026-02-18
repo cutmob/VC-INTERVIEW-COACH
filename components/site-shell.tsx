@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
+import { SiteFooter } from "./site-footer";
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
@@ -29,14 +30,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </nav>
       </header>
       {children}
-      <footer className="mt-auto border-t border-wood-200 pt-8">
-        <div className="flex items-center justify-between">
-          <span className="font-display text-xs font-bold text-wood-800">Vantive</span>
-          <span className="font-mono text-[10px] text-wood-500">
-            No accounts. No saved data. One session per key.
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

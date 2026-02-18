@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   title: "Vantive — Realtime AI Pitch Coach",
   description:
     "7 minutes. Live pressure. Practice your pitch and get interrupted by a VC-style AI coach.",
-  metadataBase: new URL("https://vantive.app"),
+  metadataBase: new URL("https://vantive.vercel.app"),
   openGraph: {
     title: "Vantive — Realtime AI Pitch Coach",
     description: "7 minutes. Live pressure. No fluff.",
-    url: "https://vantive.app",
+    url: "https://vantive.vercel.app",
     siteName: "Vantive",
   },
 };

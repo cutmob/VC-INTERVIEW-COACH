@@ -17,9 +17,11 @@ export function SideDecor() {
     const currentTheme = resolvedTheme || theme;
     const isDark = currentTheme === "dark";
 
+    if (!isDark) return null;
+
     return (
         <div className="pointer-events-none fixed left-0 top-0 z-0 h-full w-[400px] overflow-hidden">
-            {isDark ? <TechWires /> : <OrganicVines />}
+            <TechWires />
 
             {/* Fade mask to blend into content */}
             <div
@@ -34,66 +36,6 @@ export function SideDecor() {
     );
 }
 
-function OrganicVines() {
-    // Organic, curved paths
-    const paths = [
-        "M0,100 C60,90 100,140 140,180 C180,220 160,280 200,320",
-        "M0,350 C50,340 100,370 140,400 C180,430 150,480 190,510",
-        "M0,600 C70,590 120,630 170,660 C210,690 180,750 220,780",
-        "M0,850 C60,840 110,880 160,910 C200,940 170,980 210,1000",
-        // Secondary weaving vines
-        "M0,200 C40,220 80,190 120,220 C160,250 140,290 180,310",
-        "M0,450 C50,470 90,440 130,470 C170,500 150,540 190,560",
-        "M0,700 C40,720 80,690 120,720 C160,750 140,790 180,810",
-    ];
-
-    return (
-        <svg className="h-full w-full opacity-30" preserveAspectRatio="xMinYMin slice" viewBox="0 0 400 1000">
-            {paths.map((d, i) => (
-                <motion.path
-                    key={i}
-                    d={d}
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth={1.5 + (i % 2)}
-                    strokeLinecap="round"
-                    className="text-wood-600 dark:text-wood-500"
-                    initial={{ pathLength: 0, opacity: 0 }}
-                    animate={{
-                        pathLength: 1,
-                        opacity: [0, 1, 0.8],
-                        transition: {
-                            duration: 4 + Math.random() * 2,
-                            delay: i * 0.3,
-                            ease: [0.4, 0, 0.2, 1] // Organic easing
-                        }
-                    }}
-                />
-            ))}
-            {/* Subtle floating leaves/particles */}
-            {[...Array(6)].map((_, i) => (
-                <motion.circle
-                    key={`leaf-${i}`}
-                    r={2 + Math.random()}
-                    className="text-wood-500/60"
-                    initial={{ x: 50, y: 100 + i * 150, opacity: 0 }}
-                    animate={{
-                        x: [50, 80 + Math.random() * 40],
-                        y: [100 + i * 150, 90 + i * 150],
-                        opacity: [0, 0.6, 0],
-                    }}
-                    transition={{
-                        duration: 5 + Math.random() * 3,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                        delay: i * 0.5,
-                    }}
-                />
-            ))}
-        </svg>
-    );
-}
 
 function TechWires() {
     // Circuit/Tech lines - orthogonal and sharp

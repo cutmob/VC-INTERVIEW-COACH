@@ -4,6 +4,7 @@ import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SideDecor } from "@/components/ui/side-decor";
+import { SiteFooter } from "@/components/site-footer";
 
 export default function HomePage() {
   return (
@@ -128,40 +129,42 @@ export default function HomePage() {
         />
         <div className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 hidden dark:block bg-[linear-gradient(90deg,transparent,rgba(196,122,74,0.4),transparent)]" />
 
-
         <div className="mx-auto max-w-5xl">
           <div className="mb-4 text-center">
             <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
-              How it works
+              What happens when you start
             </span>
           </div>
-          <h2 className="heading-display mb-16 text-center text-3xl text-wood-900 sm:text-4xl dark:text-wood-900">
-            Three minutes in, you&apos;ll feel it.
+          <h2 className="heading-display mb-6 text-center text-3xl text-wood-900 sm:text-4xl dark:text-wood-900">
+            Most founders fumble in the first 60 seconds.
           </h2>
+          <p className="mx-auto mb-16 max-w-xl text-center text-[15px] leading-relaxed text-wood-600 dark:text-wood-600">
+            Real VCs decide in minutes whether to keep listening. This session replicates that pressure so you never waste a real meeting again.
+          </p>
 
           <div className="grid gap-6 sm:grid-cols-3">
             {[
               {
                 num: "01",
-                title: "60-second opener",
-                desc: "The coach opens cold. You have one minute before the first interruption hits.",
+                title: "You pitch. The clock starts.",
+                desc: "No warm-up, no pleasantries. You get 60 seconds of uninterrupted time — exactly like a real partner meeting. What you say here sets the tone for everything.",
               },
               {
                 num: "02",
-                title: "Hard interruptions",
-                desc: "Vague framing gets cut immediately. You are pushed to be specific, fast.",
+                title: "Weak points get exposed.",
+                desc: "The AI cuts in the moment your framing goes vague. Buzzwords, hand-waving, unclear asks — all challenged in real time. This is where your pitch actually improves.",
               },
               {
                 num: "03",
-                title: "Single-session key",
-                desc: "Pay once, receive one key, run one live 7-minute session. No subscriptions.",
+                title: "$12. No subscription. No trace.",
+                desc: "One key, one 7-minute session, then it's gone. No account, no recordings, no recurring charges. Just the sharpest version of your pitch.",
               },
             ].map(({ num, title, desc }) => (
               <SpotlightCard key={num} className="p-8 items-start justify-start flex-col gap-4 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.03] dark:border-white/5 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.1)">
                 <span className="mb-2 block font-mono text-4xl font-bold text-wood-300 dark:text-white/[0.1]">
                   {num}
                 </span>
-                <h3 className="heading-sans text-[17px] text-wood-900 dark:text-wood-900">
+                <h3 className="heading-sans text-[17px] font-semibold text-wood-900 dark:text-wood-900">
                   {title}
                 </h3>
                 <p className="text-sm leading-relaxed text-wood-700 dark:text-wood-600">
@@ -170,6 +173,7 @@ export default function HomePage() {
               </SpotlightCard>
             ))}
           </div>
+
         </div>
       </section>
 
@@ -221,14 +225,8 @@ export default function HomePage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="border-t border-wood-200 px-6 py-8 bg-wood-50 dark:border-white/5 dark:bg-transparent">
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <span className="font-display text-sm font-bold text-wood-800 dark:text-[#524E4B]">Vantive</span>
-          <span className="font-mono text-[10px] text-wood-500 dark:text-[#3D3A38]">
-            No accounts. No saved data. One session per key.
-          </span>
-        </div>
-      </footer>
+      {/* ── Footer ── */}
+      <SiteFooter />
 
     </div>
   );
