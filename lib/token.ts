@@ -20,12 +20,11 @@ export function generateToken() {
   return `PCH-${part()}-${part()}`;
 }
 
-export async function saveToken(token: string, value: SessionToken) {
+export async function saveToken(token: string, value: SessionToken, ttlSeconds = 86400) {
   if (!TOKEN_REGEX.test(token)) {
     throw new Error("Invalid token format");
   }
-  // Token expires in 24 hours, matching the business logic
-  await getRedis().set(`token:${token}`, JSON.stringify(value), "EX", 86400);
+  await getRedis().set(`token:${token}`, JSON.stringify(value), "EX", ttlSeconds);
 }
 
 export async function getToken(token: string): Promise<SessionToken | null> {

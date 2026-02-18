@@ -141,7 +141,7 @@ function SessionInner() {
             <p className="mt-5 font-mono text-xs text-wood-500 dark:text-[#6B6360]">{status}</p>
           )}
 
-          <audio ref={remoteAudioRef} autoPlay className="mt-6 w-full opacity-60" />
+          <audio ref={remoteAudioRef} autoPlay className="hidden" />
         </div>
       </main>
     </SiteShell>

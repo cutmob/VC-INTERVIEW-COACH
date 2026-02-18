@@ -15,7 +15,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Too many requests", retryAfter: allowed.retryAfter }, { status: 429 });
   }
 
-  const payload = (await req.json()) as { token?: string };
+  let payload: { token?: string };
+  try {
+    payload = (await req.json()) as { token?: string };
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
   const token = normalizeToken(payload.token ?? "");
 
   if (!isValidTokenFormat(token)) {

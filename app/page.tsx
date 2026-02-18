@@ -56,7 +56,7 @@ export default function HomePage() {
         <div className="relative z-10 flex flex-col items-center gap-7 text-center">
 
           {/* Headline */}
-          <h1 className="heading-display max-w-[820px] text-[clamp(32px,8vw,96px)] leading-[1.0] text-wood-900 animate-fade-in-up dark:text-wood-900" style={{ animationDelay: "0.2s" }}>
+          <h1 className="heading-display max-w-[820px] text-[clamp(40px,8vw,96px)] leading-[1.0] text-wood-900 animate-fade-in-up dark:text-wood-900" style={{ animationDelay: "0.2s" }}>
             Practice your pitch.
             <br />
             <span
