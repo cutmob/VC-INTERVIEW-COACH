@@ -46,7 +46,8 @@ function SessionInner() {
   const remoteAudioRef = useRef<HTMLAudioElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const endSession = useCallback(() => {
+  const endSession = useCallback((showComplete = true) => {
+    const hadActiveSession = pcRef.current !== null;
     if (timerRef.current) { window.clearTimeout(timerRef.current); timerRef.current = null; }
     if (countdownRef.current) { window.clearInterval(countdownRef.current); countdownRef.current = null; }
     micStreamRef.current?.getTracks().forEach((t: MediaStreamTrack) => t.stop());
@@ -56,12 +57,14 @@ function SessionInner() {
     pcRef.current = null;
     setRunning(false);
     setSecondsLeft(null);
-    setStatus("Session complete.");
+    if (showComplete && hadActiveSession) {
+      setStatus("Session complete.");
+    }
     setUploadStatus(null);
     setDragOver(false);
   }, []);
 
-  useEffect(() => endSession, [endSession]);
+  useEffect(() => () => endSession(false), [endSession]);
 
   const sendImage = useCallback(async (file: File) => {
     const dc = dcRef.current;
@@ -290,7 +293,7 @@ function SessionInner() {
                 </button>
               ) : (
                 <button
-                  onClick={endSession}
+                  onClick={() => endSession()}
                   className="flex-1 rounded-full border border-wood-300 bg-wood-50 px-8 py-3.5 text-sm font-semibold text-wood-700 transition hover:border-wood-400 hover:text-wood-900 dark:border-white/10 dark:bg-white/5 dark:text-wood-700 dark:hover:border-white/20 dark:hover:text-wood-900"
                 >
                   End Session

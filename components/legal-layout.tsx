@@ -109,7 +109,7 @@ export function LegalLayout({ title, subtitle, sections }: LegalLayoutProps) {
                             <h2 className="heading-sans mb-4 text-xl font-bold text-wood-900 dark:text-wood-900">
                                 {title}
                             </h2>
-                            <div className="prose prose-wood dark:prose-invert max-w-none text-wood-700 dark:text-wood-400">
+                            <div className="prose prose-wood dark:prose-invert max-w-none text-wood-700 dark:text-white/90">
                                 {content}
                             </div>
                         </section>
@@ -120,7 +120,7 @@ export function LegalLayout({ title, subtitle, sections }: LegalLayoutProps) {
                         <h2 className="heading-sans mb-4 text-xl font-bold text-wood-900 dark:text-wood-900">
                             Third-Party AI Policies
                         </h2>
-                        <div className="text-wood-700 dark:text-wood-400">
+                        <div className="text-wood-700 dark:text-white/90">
                             <p>
                                 Vantive utilizes OpenAI&apos;s API for its core functionality. We do not control their data processing policies, but we select enterprise-grade endpoints that do not train on your data by default. We encourage you to review their policies directly.
                             </p>
