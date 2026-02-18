@@ -21,9 +21,6 @@ export default function PricingPage() {
 
         <main className="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center py-10 sm:py-16">
           <div className="mb-10 sm:mb-14 text-center">
-            <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
-              Pricing
-            </p>
             <h1 className="heading-display text-3xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
               Your next investor meeting<br className="hidden sm:block" /> is worth more than $12.
             </h1>

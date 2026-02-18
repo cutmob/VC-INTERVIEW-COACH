@@ -174,9 +174,6 @@ function SessionInner() {
 
         {/* Section header */}
         <div className="mb-10 sm:mb-14 text-center">
-          <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
-            Session Room
-          </p>
           <h1 className="heading-display text-3xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
             Live Pitch Room
           </h1>
