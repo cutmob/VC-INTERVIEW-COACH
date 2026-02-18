@@ -30,10 +30,10 @@ export function CtaButton({ label = "Start Session — $12" }: { label?: string 
       <ShimmerButton
         onClick={startCheckout}
         disabled={loading}
-        className="w-full text-sm font-semibold text-white shadow-[0_4px_14px_rgba(199,125,77,0.35)] disabled:cursor-not-allowed disabled:opacity-50 dark:shadow-[0_0_30px_rgba(196,122,74,0.35)] dark:text-white"
+        className="w-full text-sm font-semibold text-white shadow-[0_4px_14px_rgba(199,125,77,0.3)] hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] transition-shadow duration-500 disabled:cursor-not-allowed disabled:opacity-50 dark:shadow-[0_0_30px_rgba(196,122,74,0.3)] dark:hover:shadow-[0_0_50px_rgba(196,122,74,0.5)] dark:text-white"
         shimmerColor="var(--btn-glow-start)"
         shimmerSize="2px"
-        borderRadius="9999px"
+        borderRadius="100px"
         background="var(--btn-glow-mid)"
       >
         <span className="relative z-10 px-8 py-1">
