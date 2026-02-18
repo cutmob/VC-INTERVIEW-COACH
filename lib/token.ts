@@ -7,6 +7,7 @@ export type SessionToken = {
   active: boolean;
   created: string;
   stripeSessionId: string;
+  session_started_at?: number; // Unix timestamp when the 7-min window began
 };
 
 const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";

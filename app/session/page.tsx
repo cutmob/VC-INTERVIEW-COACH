@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { SiteShell } from "@/components/site-shell";
 
-type StartSessionResponse = { client_secret?: string; model?: string; error?: string };
+type StartSessionResponse = { client_secret?: string; model?: string; remaining_seconds?: number; error?: string };
 const SESSION_MS = 7 * 60 * 1000;
 
 function SessionInner() {
@@ -67,10 +67,11 @@ function SessionInner() {
       );
       if (!sdpRes.ok) throw new Error("Unable to establish realtime connection");
       await pc.setRemoteDescription({ type: "answer", sdp: await sdpRes.text() });
+      const serverSeconds = data.remaining_seconds ?? SESSION_MS / 1000;
       setRunning(true);
-      setSecondsLeft(SESSION_MS / 1000);
+      setSecondsLeft(serverSeconds);
       setStatus(null);
-      timerRef.current = window.setTimeout(endSession, SESSION_MS);
+      timerRef.current = window.setTimeout(endSession, serverSeconds * 1000);
       countdownRef.current = window.setInterval(() => {
         setSecondsLeft((s: number | null) => (s !== null && s > 0 ? s - 1 : 0));
       }, 1000);

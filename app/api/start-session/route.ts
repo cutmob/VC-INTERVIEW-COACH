@@ -6,6 +6,8 @@ import { isValidTokenFormat, normalizeToken } from "@/lib/sanitize-input";
 import { getToken, setTokenConsumed } from "@/lib/token";
 import { withTokenLock } from "@/lib/token-lock";
 
+const SESSION_DURATION_SEC = 7 * 60; // 7 minutes
+
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
   const allowed = await rateLimit(`start-session:${ip}`);
@@ -27,6 +29,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid token format" }, { status: 400 });
   }
 
+  let remainingSeconds = SESSION_DURATION_SEC;
   let previousState: Awaited<ReturnType<typeof getToken>> | null = null;
 
   try {
@@ -35,7 +38,26 @@ export async function POST(req: NextRequest) {
       if (!record || record.remaining_sessions <= 0 || record.expires_at < Math.floor(Date.now() / 1000)) {
         throw new Error("Token unavailable");
       }
-      // Single-use tokens can only have one active session at a time
+
+      const now = Math.floor(Date.now() / 1000);
+
+      // If session was already started, check if time remains
+      if (record.session_started_at) {
+        const elapsed = now - record.session_started_at;
+        const left = SESSION_DURATION_SEC - elapsed;
+
+        if (left <= 0) {
+          throw new Error("Session time expired");
+        }
+
+        // Reconnection — time is still ticking, allow re-entry
+        remainingSeconds = left;
+        previousState = record;
+        await setTokenConsumed(token, { ...record, active: true });
+        return;
+      }
+
+      // Fresh session — single-use tokens can't start if already active
       if (record.remaining_sessions <= 1 && record.active) {
         throw new Error("Token unavailable");
       }
@@ -44,7 +66,8 @@ export async function POST(req: NextRequest) {
       await setTokenConsumed(token, {
         ...record,
         remaining_sessions: record.remaining_sessions - 1,
-        active: true
+        active: true,
+        session_started_at: now,
       });
     });
   } catch {
@@ -79,8 +102,12 @@ export async function POST(req: NextRequest) {
       throw new Error("Missing realtime client secret");
     }
 
-    auditLog("session.start", { tokenPrefix: token.slice(0, 7), ip });
-    return NextResponse.json({ client_secret: clientSecret, model: REALTIME_MODEL });
+    auditLog("session.start", { tokenPrefix: token.slice(0, 7), ip, remainingSeconds });
+    return NextResponse.json({
+      client_secret: clientSecret,
+      model: REALTIME_MODEL,
+      remaining_seconds: remainingSeconds,
+    });
   } catch {
     if (previousState) {
       await setTokenConsumed(token, previousState);
