@@ -41,6 +41,13 @@ export function SiteFooter() {
                         >
                             Privacy
                         </Link>
+                        <span className="h-3 w-px bg-wood-200 dark:bg-white/10" aria-hidden="true" />
+                        <Link
+                            href="/contact"
+                            className="text-wood-500 transition hover:text-wood-800 dark:text-wood-600 dark:hover:text-wood-300"
+                        >
+                            Contact
+                        </Link>
                     </nav>
                 </div>
 

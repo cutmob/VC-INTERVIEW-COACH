@@ -11,7 +11,7 @@ export function middleware(req: NextRequest) {
     : "script-src 'self' 'unsafe-inline' https://js.stripe.com";
   res.headers.set(
     "Content-Security-Policy",
-    `default-src 'self'; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; ${scriptSrc}; style-src 'self' 'unsafe-inline'; media-src 'self' blob:;`
+    `default-src 'self'; img-src 'self' data: https://img.logo.dev; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; ${scriptSrc}; style-src 'self' 'unsafe-inline'; media-src 'self' blob:;`
   );
   res.headers.set("Permissions-Policy", "microphone=(self)");
 

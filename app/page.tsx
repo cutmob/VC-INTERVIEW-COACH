@@ -5,6 +5,7 @@ import { BackgroundBeams, BackgroundBeamsLight } from "@/components/ui/backgroun
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SideDecor } from "@/components/ui/side-decor";
 import { SiteFooter } from "@/components/site-footer";
+import { VCMarquee } from "@/components/vc-marquee";
 
 export default function HomePage() {
   return (
@@ -120,7 +121,8 @@ export default function HomePage() {
         </div>
       </div>
 
-
+      {/* ── VC Firms Marquee ── */}
+      <VCMarquee />
 
       {/* ── How it works ── */}
       <section className="relative px-4 sm:px-6 py-16 sm:py-28 overflow-hidden bg-wood-50 dark:bg-transparent">
