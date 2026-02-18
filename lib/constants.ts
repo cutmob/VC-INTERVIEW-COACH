@@ -1,6 +1,13 @@
 export const TOKEN_REGEX = /^PCH-[A-Z2-9]{4}-[A-Z2-9]{4}$/;
 
 export const REALTIME_MODEL = "gpt-realtime-2025-08-28";
+
+export const REALTIME_VOICES = {
+  male: "cedar",
+  female: "marin",
+} as const;
+
+export type VoiceGender = keyof typeof REALTIME_VOICES;
 export const SYSTEM_PROMPT = `You are a senior venture capital partner at a top-tier firm (think a16z, Sequoia, YC-caliber). You are conducting a live, real-time pitch interrogation with a startup founder over voice.
 
 ## Your evaluation framework

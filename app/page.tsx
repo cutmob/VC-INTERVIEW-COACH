@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ShimmerButton from "@/components/ui/shimmer-button";
 import { SpotlightCard } from "@/components/ui/spotlight-card";
-import { BackgroundBeams } from "@/components/ui/background-beams";
+import { BackgroundBeams, BackgroundBeamsLight } from "@/components/ui/background-beams";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { SideDecor } from "@/components/ui/side-decor";
 import { SiteFooter } from "@/components/site-footer";
@@ -39,6 +39,11 @@ export default function HomePage() {
         {/* Animated canvas background (Dark Mode Only) */}
         <div className="absolute inset-0 hidden dark:block pointer-events-none">
           <BackgroundBeams className="opacity-40" />
+        </div>
+
+        {/* Animated canvas background (Light Mode Only) */}
+        <div className="absolute inset-0 dark:hidden pointer-events-none">
+          <BackgroundBeamsLight className="opacity-50" />
         </div>
 
         {/* Subtle radial gradient to center focus */}
