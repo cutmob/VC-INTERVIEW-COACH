@@ -32,7 +32,11 @@ export async function POST(req: NextRequest) {
   try {
     await withTokenLock(token, async () => {
       const record = await getToken(token);
-      if (!record || record.remaining_sessions <= 0 || record.active || record.expires_at < Math.floor(Date.now() / 1000)) {
+      if (!record || record.remaining_sessions <= 0 || record.expires_at < Math.floor(Date.now() / 1000)) {
+        throw new Error("Token unavailable");
+      }
+      // Single-use tokens can only have one active session at a time
+      if (record.remaining_sessions <= 1 && record.active) {
         throw new Error("Token unavailable");
       }
 

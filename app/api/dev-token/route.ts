@@ -19,13 +19,15 @@ export async function POST(req: NextRequest) {
 
   const token = `PCH-${randomPart()}-${randomPart()}`;
 
+  const yearInSeconds = 60 * 60 * 24 * 365;
+
   await saveToken(token, {
     remaining_sessions: 999999,
-    expires_at: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 365, // 1 year
+    expires_at: Math.floor(Date.now() / 1000) + yearInSeconds,
     active: false,
     created: new Date().toISOString(),
     stripeSessionId: "dev_manual",
-  });
+  }, yearInSeconds);
 
   return NextResponse.json({ token, note: "Unlimited dev token — 1 year expiry" });
 }
