@@ -1,11 +1,17 @@
-import { getStore } from "@netlify/blobs";
+import { Redis } from "@upstash/redis";
 
-const lockStore = getStore({ name: "token-locks", consistency: "strong" });
+let _redis: Redis | null = null;
+function redis() {
+  if (!_redis) _redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL!,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+  });
+  return _redis;
+}
 
 export async function withTokenLock<T>(token: string, fn: () => Promise<T>): Promise<T> {
   const key = `lock:${token}`;
-  const acquired = await lockStore.set(key, "1")
-    .then(() => true).catch(() => false);
+  const acquired = await redis().set(key, "1", { nx: true, ex: 10 });
 
   if (!acquired) {
     throw new Error("Token currently locked. Try again.");
@@ -14,6 +20,6 @@ export async function withTokenLock<T>(token: string, fn: () => Promise<T>): Pro
   try {
     return await fn();
   } finally {
-    await lockStore.delete(key);
+    await redis().del(key);
   }
 }
