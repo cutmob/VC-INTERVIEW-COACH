@@ -35,6 +35,8 @@ function SessionInner() {
   const [running, setRunning] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null);
   const [uploadStatus, setUploadStatus] = useState<string | null>(null);
+  const [showUploadInfo, setShowUploadInfo] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
 
   const pcRef = useRef<RTCPeerConnection | null>(null);
   const dcRef = useRef<RTCDataChannel | null>(null);
@@ -56,6 +58,7 @@ function SessionInner() {
     setSecondsLeft(null);
     setStatus("Session complete.");
     setUploadStatus(null);
+    setDragOver(false);
   }, []);
 
   useEffect(() => endSession, [endSession]);
@@ -89,7 +92,6 @@ function SessionInner() {
         },
       });
       dc.send(event);
-      // Prompt a response about the uploaded material
       dc.send(JSON.stringify({ type: "response.create" }));
       setUploadStatus(`Sent: ${file.name}`);
       setTimeout(() => setUploadStatus(null), 3000);
@@ -106,6 +108,7 @@ function SessionInner() {
 
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
+    setDragOver(false);
     const file = e.dataTransfer.files[0];
     if (file) sendImage(file);
   }, [sendImage]);
@@ -130,7 +133,6 @@ function SessionInner() {
       pcRef.current = pc;
       media.getTracks().forEach((track) => pc.addTrack(track, media));
 
-      // Create data channel for sending events (images, text)
       const dc = pc.createDataChannel("oai-events");
       dcRef.current = dc;
 
@@ -165,131 +167,226 @@ function SessionInner() {
 
   return (
     <SiteShell>
-      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-0 py-6 sm:py-10">
-        <div className="relative overflow-hidden rounded-2xl border border-wood-200 bg-wood-100 p-5 sm:p-9 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:backdrop-blur-sm dark:shadow-none">
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-px"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(199,125,77,0.4), transparent)" }}
-          />
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-px hidden dark:block"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
-          />
+      <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center py-10 sm:py-16">
 
-          <div className="mb-8 border-b border-wood-200 pb-8 dark:border-white/[0.07]">
-            <p className="mb-1 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
-              Session Room
-            </p>
-            <h1 className="heading-display text-2xl sm:text-3xl text-wood-900 dark:text-wood-900">Live Pitch Room</h1>
-          </div>
-
-          {/* Timer */}
-          {running && secondsLeft !== null && (
-            <div className="mb-6 flex items-center justify-between rounded-xl border border-wood-300 bg-wood-200/50 px-5 py-3 dark:border-wood-400/20 dark:bg-wood-400/10">
-              <span className="text-sm font-medium text-wood-700 dark:text-wood-300">Time remaining</span>
-              <span className="font-mono text-lg font-bold text-wood-900 dark:text-wood-300">{fmt(secondsLeft)}</span>
-            </div>
-          )}
-
-          {/* Access key */}
-          <div className="mb-4 space-y-2">
-            <label className="block text-sm font-medium text-wood-700 dark:text-wood-600">Access key</label>
-            <input
-              value={token}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setToken(e.target.value.toUpperCase())}
-              placeholder="PCH-XXXX-XXXX"
-              disabled={running}
-              className="w-full rounded-xl border border-wood-300 bg-wood-50 px-4 py-3 font-mono text-sm text-wood-900 placeholder-wood-400 transition focus:border-wood-400 focus:outline-none focus:ring-1 focus:ring-wood-400/30 disabled:opacity-50 dark:border-white/10 dark:bg-black/30 dark:text-wood-800 dark:placeholder-[#524E4B] dark:focus:border-wood-400/50 dark:focus:ring-wood-400/30"
-            />
-          </div>
-
-          {/* Voice toggle */}
-          <div className="mb-6 space-y-2">
-            <label className="block text-sm font-medium text-wood-700 dark:text-wood-600">Interviewer voice</label>
-            <div className="flex gap-2">
-              {(["male", "female"] as const).map((g) => (
-                <button
-                  key={g}
-                  type="button"
-                  disabled={running}
-                  onClick={() => setVoice(g)}
-                  className={`flex-1 rounded-xl border px-4 py-2.5 text-sm font-medium transition disabled:opacity-50 ${
-                    voice === g
-                      ? "border-wood-400 bg-wood-400 text-white shadow-sm dark:border-wood-400 dark:bg-wood-400 dark:text-white"
-                      : "border-wood-300 bg-wood-50 text-wood-600 hover:border-wood-400 hover:text-wood-900 dark:border-white/10 dark:bg-white/5 dark:text-wood-700 dark:hover:border-white/20 dark:hover:text-wood-900"
-                  }`}
-                >
-                  {g === "male" ? "Male" : "Female"}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Action buttons */}
-          <div className="flex flex-wrap gap-3">
-            <button
-              onClick={start}
-              disabled={running || !token.trim()}
-              className="flex-1 rounded-full bg-wood-400 px-6 py-3 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(199,125,77,0.3)] transition hover:bg-wood-500 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-wood-400 dark:shadow-[0_0_20px_rgba(196,122,74,0.3)] dark:hover:bg-wood-300"
-            >
-              {running ? "Session Active" : "Start Session"}
-            </button>
-            <button
-              onClick={endSession}
-              disabled={!running}
-              className="rounded-full border border-wood-300 bg-wood-50 px-6 py-3 text-sm font-semibold text-wood-600 transition hover:border-wood-400 hover:text-wood-900 disabled:cursor-not-allowed disabled:opacity-40 dark:border-white/10 dark:bg-white/5 dark:text-wood-700 dark:hover:border-white/20 dark:hover:text-wood-900"
-            >
-              Stop
-            </button>
-          </div>
-
-          {status && (
-            <p className="mt-5 font-mono text-xs text-wood-500 dark:text-[#6B6360]">{status}</p>
-          )}
-
-          <audio ref={remoteAudioRef} autoPlay className="hidden" />
+        {/* Section header */}
+        <div className="mb-10 sm:mb-14 text-center">
+          <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
+            Session Room
+          </p>
+          <h1 className="heading-display text-3xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
+            Live Pitch Room
+          </h1>
+          <p className="mt-5 text-lg text-wood-600 dark:text-wood-600">
+            Enter your access key, choose your interviewer, and begin.
+          </p>
         </div>
 
-        {/* Upload panel — only visible during active session */}
-        {running && (
-          <div
-            className="mt-4 rounded-2xl border border-wood-200 bg-wood-100 p-4 sm:p-6 shadow-sm dark:bg-white/[0.04] dark:border-white/10"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={handleDrop}
-          >
-            <div className="mb-3 flex items-center justify-between">
-              <p className="text-sm font-medium text-wood-700 dark:text-wood-600">Pitch Materials</p>
-              <span
-                className="cursor-help text-xs text-wood-400 dark:text-wood-700 underline decoration-dotted underline-offset-2"
-                title={`Upload images of pitch decks, financials, or product screenshots. Accepted: ${ACCEPTED_EXTENSIONS.join(", ")}. Max ${UPLOAD_MAX_SIZE_MB}MB per file. The AI will review and reference uploaded materials in its evaluation.`}
-              >
-                What can I upload?
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-dashed border-wood-300 bg-wood-50/50 px-4 py-6 text-sm text-wood-500 transition hover:border-wood-400 hover:bg-wood-50 hover:text-wood-700 dark:border-white/10 dark:bg-white/[0.02] dark:text-wood-700 dark:hover:border-white/20 dark:hover:text-wood-600"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              <span>Drop an image here or click to upload</span>
-            </button>
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept={ACCEPTED_MIME.join(",")}
-              onChange={handleFileSelect}
-              className="hidden"
-              aria-label="Upload pitch material"
+        {/* Main card */}
+        <div className="mx-auto w-full max-w-md">
+          <div className="relative overflow-hidden rounded-xl border border-wood-200 bg-wood-100 p-5 sm:p-9 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
+            {/* Top glow line */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(199,125,77,0.4), transparent)" }}
+            />
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px hidden dark:block"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
             />
 
-            {uploadStatus && (
-              <p className="mt-3 font-mono text-xs text-wood-500 dark:text-[#6B6360]">{uploadStatus}</p>
+            {/* Timer — active session */}
+            {running && secondsLeft !== null && (
+              <div className="mb-8 flex items-center justify-between border-b border-wood-200 pb-8 dark:border-white/[0.07]">
+                <div>
+                  <p className="heading-sans text-lg text-wood-900 dark:text-wood-900">Session Active</p>
+                  <p className="mt-1 text-sm text-wood-600 dark:text-[#6B6360]">
+                    {voice === "male" ? "Male" : "Female"} interviewer
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="font-display text-4xl font-bold text-wood-900 dark:text-wood-900">
+                    {fmt(secondsLeft)}
+                  </span>
+                  <p className="font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">remaining</p>
+                </div>
+              </div>
             )}
+
+            {/* Pre-session header */}
+            {!running && (
+              <div className="mb-8 flex items-start justify-between border-b border-wood-200 pb-8 dark:border-white/[0.07]">
+                <div>
+                  <h2 className="heading-sans text-lg text-wood-900 dark:text-wood-900">
+                    Pitch Interrogation
+                  </h2>
+                  <p className="mt-1 text-sm text-wood-600 dark:text-[#6B6360]">
+                    7-minute timed session
+                  </p>
+                </div>
+                <div className="text-right">
+                  <span className="font-display text-4xl font-bold text-wood-900 dark:text-wood-900">7:00</span>
+                  <p className="font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">minutes</p>
+                </div>
+              </div>
+            )}
+
+            {/* Access key */}
+            {!running && (
+              <div className="mb-5">
+                <label className="mb-2 block text-sm font-medium text-wood-700 dark:text-wood-600">
+                  Access key
+                </label>
+                <input
+                  value={token}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setToken(e.target.value.toUpperCase())}
+                  placeholder="PCH-XXXX-XXXX"
+                  className="w-full rounded-xl border border-wood-200 bg-wood-50 px-4 py-3 font-mono text-sm text-wood-900 placeholder-wood-400 transition focus:border-wood-400 focus:outline-none focus:ring-1 focus:ring-wood-400/30 dark:border-white/[0.07] dark:bg-black/30 dark:text-wood-800 dark:placeholder-[#524E4B] dark:focus:border-wood-400/50 dark:focus:ring-wood-400/30"
+                />
+              </div>
+            )}
+
+            {/* Voice toggle */}
+            {!running && (
+              <div className="mb-8">
+                <label className="mb-2 block text-sm font-medium text-wood-700 dark:text-wood-600">
+                  Interviewer voice
+                </label>
+                <div className="flex gap-2">
+                  {(["male", "female"] as const).map((g) => (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => setVoice(g)}
+                      className={`flex-1 flex items-center justify-center gap-2.5 rounded-xl border px-4 py-2.5 text-sm font-medium transition ${
+                        voice === g
+                          ? "border-wood-400/60 bg-wood-400/10 text-wood-900 dark:border-wood-400/30 dark:bg-wood-400/10 dark:text-wood-900"
+                          : "border-wood-200 bg-wood-50 text-wood-600 hover:border-wood-300 hover:text-wood-800 dark:border-white/[0.07] dark:bg-black/20 dark:text-wood-700 dark:hover:border-white/10 dark:hover:text-wood-800"
+                      }`}
+                    >
+                      <span
+                        className={`h-1.5 w-1.5 flex-shrink-0 rounded-full transition ${
+                          voice === g
+                            ? "bg-wood-400 shadow-[0_0_6px_rgba(199,125,77,0.4)] dark:shadow-[0_0_6px_rgba(196,122,74,0.8)]"
+                            : "bg-wood-300 dark:bg-white/10"
+                        }`}
+                      />
+                      {g === "male" ? "Male" : "Female"}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Start / End button */}
+            <div className="flex flex-wrap gap-3">
+              {!running ? (
+                <button
+                  onClick={start}
+                  disabled={!token.trim()}
+                  className="flex-1 rounded-full bg-wood-400 px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(199,125,77,0.3)] transition hover:bg-wood-500 hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] disabled:cursor-not-allowed disabled:opacity-50 dark:bg-wood-400 dark:shadow-[0_0_20px_rgba(196,122,74,0.3)] dark:hover:bg-wood-300 dark:hover:shadow-[0_0_30px_rgba(196,122,74,0.5)]"
+                >
+                  Start Session
+                </button>
+              ) : (
+                <button
+                  onClick={endSession}
+                  className="flex-1 rounded-full border border-wood-300 bg-wood-50 px-8 py-3.5 text-sm font-semibold text-wood-700 transition hover:border-wood-400 hover:text-wood-900 dark:border-white/10 dark:bg-white/5 dark:text-wood-700 dark:hover:border-white/20 dark:hover:text-wood-900"
+                >
+                  End Session
+                </button>
+              )}
+            </div>
+
+            {status && (
+              <p className="mt-5 text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
+                {status}
+              </p>
+            )}
+
+            <audio ref={remoteAudioRef} autoPlay className="hidden" />
           </div>
-        )}
+
+          {/* Upload panel — active session only */}
+          {running && (
+            <div
+              className={`relative mt-4 overflow-hidden rounded-xl border bg-wood-100 p-4 sm:p-6 shadow-sm transition dark:bg-white/[0.04] dark:shadow-none ${
+                dragOver
+                  ? "border-wood-400/50 dark:border-wood-400/30"
+                  : "border-wood-200 dark:border-white/10"
+              }`}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-wood-400 shadow-[0_0_6px_rgba(199,125,77,0.4)] dark:shadow-[0_0_6px_rgba(196,122,74,0.8)]" />
+                  <p className="text-sm font-medium text-wood-700 dark:text-wood-600">
+                    Pitch Materials
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowUploadInfo(!showUploadInfo)}
+                  className="font-mono text-[10px] text-wood-500 transition hover:text-wood-700 dark:text-[#524E4B] dark:hover:text-wood-600"
+                >
+                  {showUploadInfo ? "Hide info" : "What can I upload?"}
+                </button>
+              </div>
+
+              {showUploadInfo && (
+                <div className="mb-3 rounded-lg border border-wood-200/60 bg-wood-50 p-3 dark:border-white/[0.04] dark:bg-black/20">
+                  <ul className="space-y-1.5 text-[12px] leading-relaxed text-wood-600 dark:text-wood-600">
+                    {[
+                      "Images of pitch decks, financials, or product screenshots",
+                      `Accepted: ${ACCEPTED_EXTENSIONS.join(", ")}`,
+                      `Max ${UPLOAD_MAX_SIZE_MB}MB per file`,
+                      "The AI will review and reference materials in its evaluation",
+                    ].map((text) => (
+                      <li key={text} className="flex items-start gap-2">
+                        <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-wood-300 dark:bg-white/10" />
+                        {text}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className={`flex w-full items-center justify-center gap-2.5 rounded-xl border-2 border-dashed px-4 py-5 text-sm transition ${
+                  dragOver
+                    ? "border-wood-400/60 bg-wood-400/5 text-wood-700 dark:border-wood-400/30 dark:bg-wood-400/5 dark:text-wood-600"
+                    : "border-wood-200 bg-wood-50/50 text-wood-500 hover:border-wood-300 hover:bg-wood-50 hover:text-wood-700 dark:border-white/[0.07] dark:bg-white/[0.02] dark:text-wood-700 dark:hover:border-white/10 dark:hover:text-wood-600"
+                }`}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-60" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+                <span>Drop an image or click to upload</span>
+              </button>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept={ACCEPTED_MIME.join(",")}
+                onChange={handleFileSelect}
+                className="hidden"
+                aria-label="Upload pitch material"
+              />
+
+              {uploadStatus && (
+                <p className="mt-3 text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
+                  {uploadStatus}
+                </p>
+              )}
+            </div>
+          )}
+        </div>
       </main>
     </SiteShell>
   );

@@ -17,11 +17,9 @@ export function SideDecor() {
     const currentTheme = resolvedTheme || theme;
     const isDark = currentTheme === "dark";
 
-    if (!isDark) return null;
-
     return (
         <div className="pointer-events-none fixed left-0 top-0 z-0 h-full w-[400px] overflow-hidden">
-            <TechWires />
+            <TechWires isDark={isDark} />
 
             {/* Fade mask to blend into content */}
             <div
@@ -37,7 +35,7 @@ export function SideDecor() {
 }
 
 
-function TechWires() {
+function TechWires({ isDark }: { isDark: boolean }) {
     // Circuit/Tech lines - orthogonal and sharp
     const paths = [
         "M0,50 L60,50 L60,100 L140,100 L140,140 L220,140",
@@ -52,13 +50,22 @@ function TechWires() {
         "M0,800 L240,800",
     ];
 
+    const gradId = isDark ? "tech-grad-dark" : "tech-grad-light";
+
     return (
-        <svg className="h-full w-full opacity-40" preserveAspectRatio="xMinYMin slice" viewBox="0 0 400 1000">
+        <svg className={`h-full w-full ${isDark ? "opacity-40" : "opacity-25"}`} preserveAspectRatio="xMinYMin slice" viewBox="0 0 400 1000">
             <defs>
-                <linearGradient id="tech-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#A47E5B" /> {/* Wood-500-ish */}
-                    <stop offset="100%" stopColor="#E8A87C" /> {/* Copper/Amber */}
-                </linearGradient>
+                {isDark ? (
+                    <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#A47E5B" />
+                        <stop offset="100%" stopColor="#E8A87C" />
+                    </linearGradient>
+                ) : (
+                    <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#C77D4D" />
+                        <stop offset="100%" stopColor="#D9B68C" />
+                    </linearGradient>
+                )}
             </defs>
 
             {paths.map((d, i) => (
@@ -66,10 +73,10 @@ function TechWires() {
                     key={i}
                     d={d}
                     fill="none"
-                    stroke={i > 4 ? "url(#tech-grad)" : "currentColor"}
+                    stroke={i > 4 ? `url(#${gradId})` : "currentColor"}
                     strokeWidth={i > 4 ? 1 : 1.5}
-                    strokeDasharray={i > 4 ? "2 4" : "none"} // "Dotted" data streams
-                    className={i > 4 ? "text-transparent" : "text-wood-600/30"} // Base lines are dark
+                    strokeDasharray={i > 4 ? "2 4" : "none"}
+                    className={i > 4 ? "text-transparent" : isDark ? "text-wood-600/30" : "text-wood-400/40"}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{
                         pathLength: 1,
@@ -89,11 +96,11 @@ function TechWires() {
                     key={`pulse-${i}`}
                     width="12"
                     height="2"
-                    fill="url(#tech-grad)"
+                    fill={`url(#${gradId})`}
                     initial={{ x: 0, y: y - 1, opacity: 0 }}
                     animate={{
                         x: [0, 250],
-                        opacity: [0, 1, 0, 0], // Flash effect
+                        opacity: [0, 1, 0, 0],
                     }}
                     transition={{
                         duration: 2.5,

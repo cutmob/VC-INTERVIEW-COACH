@@ -27,70 +27,98 @@ function SuccessInner() {
 
   return (
     <SiteShell>
-      <main className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center px-0 py-8 sm:py-12 text-center">
-        <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-10 backdrop-blur-sm">
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 h-px"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
-          />
+      <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center py-10 sm:py-16">
 
-          {!data && !error && (
-            <div className="space-y-3">
-              <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-[#3D3A38] border-t-wood-400" />
-              <p className="text-sm text-wood-600">Generating your access key...</p>
-            </div>
-          )}
+        {/* Section header */}
+        <div className="mb-10 sm:mb-14 text-center">
+          <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
+            Payment complete
+          </p>
+          <h1 className="heading-display text-3xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
+            Your key is ready
+          </h1>
+          <p className="mt-5 text-lg text-wood-600 dark:text-wood-600">
+            Copy this key and keep it safe. It expires in 24 hours.
+          </p>
+        </div>
 
-          {error && (
-            <div className="space-y-2">
-              <p className="heading-sans text-lg text-wood-900">Something went wrong</p>
-              <p className="text-sm text-red-400">{error}</p>
-            </div>
-          )}
+        {/* Card */}
+        <div className="mx-auto w-full max-w-md">
+          <div className="relative overflow-hidden rounded-xl border border-wood-200 bg-wood-100 p-5 sm:p-9 shadow-sm dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
+            {/* Top glow line */}
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(199,125,77,0.4), transparent)" }}
+            />
+            <div
+              className="pointer-events-none absolute inset-x-0 top-0 h-px hidden dark:block"
+              style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
+            />
 
-          {data && (
-            <div className="space-y-7">
-              <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-300">
-                  Payment complete
-                </p>
-                <h1 className="heading-display mt-3 text-3xl text-wood-900">
-                  Your key is ready
-                </h1>
-                <p className="mt-2 text-sm text-wood-600">
-                  Copy this key and keep it safe. It expires in 24 hours.
+            {/* Loading state */}
+            {!data && !error && (
+              <div className="flex flex-col items-center gap-3 py-4">
+                <div className="h-8 w-8 animate-spin rounded-full border-2 border-wood-200 border-t-wood-400 dark:border-white/10 dark:border-t-wood-400" />
+                <p className="text-sm text-wood-600 dark:text-wood-600">Generating your access key…</p>
+              </div>
+            )}
+
+            {/* Error state */}
+            {error && (
+              <div className="text-center">
+                <h2 className="heading-sans text-lg text-wood-900 dark:text-wood-900">Something went wrong</h2>
+                <p className="mt-2 text-sm text-red-600 dark:text-red-400">{error}</p>
+              </div>
+            )}
+
+            {/* Success state */}
+            {data && (
+              <div className="space-y-7">
+                <div className="flex items-start justify-between border-b border-wood-200 pb-8 dark:border-white/[0.07]">
+                  <div>
+                    <h2 className="heading-sans text-lg text-wood-900 dark:text-wood-900">
+                      Access Key
+                    </h2>
+                    <p className="mt-1 text-sm text-wood-600 dark:text-[#6B6360]">
+                      Single-use &middot; 24-hour expiry
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="font-display text-4xl font-bold text-wood-900 dark:text-wood-900">1</span>
+                    <p className="font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">session</p>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(data.token);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  className="group relative w-full cursor-pointer rounded-xl border border-wood-200 bg-wood-50 px-6 py-4 text-center transition hover:border-wood-400 dark:border-white/[0.07] dark:bg-black/30 dark:hover:border-wood-400/40"
+                  aria-label="Copy access key to clipboard"
+                >
+                  <p className="font-mono text-xl font-bold tracking-[0.15em] text-wood-900 dark:text-wood-900">
+                    {data.token}
+                  </p>
+                  <span className="mt-2 block font-mono text-[10px] text-wood-500 transition group-hover:text-wood-700 dark:text-[#524E4B] dark:group-hover:text-wood-300">
+                    {copied ? "Copied!" : "Click to copy"}
+                  </span>
+                </button>
+
+                <Link
+                  href={`/session?token=${data.token}`}
+                  className="inline-flex w-full items-center justify-center rounded-full bg-wood-400 px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_14px_rgba(199,125,77,0.3)] transition hover:bg-wood-500 hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] dark:shadow-[0_0_20px_rgba(196,122,74,0.3)] dark:hover:bg-wood-300 dark:hover:shadow-[0_0_30px_rgba(196,122,74,0.5)]"
+                >
+                  Enter Session Room
+                </Link>
+
+                <p className="text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
+                  Single use &middot; 7 minutes &middot; No account needed
                 </p>
               </div>
-
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(data.token);
-                  setCopied(true);
-                  setTimeout(() => setCopied(false), 2000);
-                }}
-                className="group relative w-full cursor-pointer rounded-xl border border-wood-200 bg-wood-100/50 px-6 py-4 transition hover:border-wood-400 dark:border-white/[0.07] dark:bg-black/30 dark:hover:border-wood-400/40"
-                aria-label="Copy access key to clipboard"
-              >
-                <p className="font-mono text-xl font-bold tracking-[0.15em] text-wood-900">
-                  {data.token}
-                </p>
-                <span className="mt-2 block font-mono text-[10px] text-wood-500 transition group-hover:text-wood-700 dark:text-[#524E4B] dark:group-hover:text-wood-300">
-                  {copied ? "Copied!" : "Click to copy"}
-                </span>
-              </button>
-
-              <Link
-                href={`/session?token=${data.token}`}
-                className="inline-flex w-full items-center justify-center rounded-full bg-wood-400 px-8 py-3.5 text-sm font-semibold text-white shadow-[0_0_30px_rgba(196,122,74,0.35)] transition hover:bg-wood-300"
-              >
-                Enter Session Room
-              </Link>
-
-              <p className="font-mono text-[10px] text-[#524E4B]">
-                Single use &middot; 7 minutes &middot; No account needed
-              </p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </main>
     </SiteShell>

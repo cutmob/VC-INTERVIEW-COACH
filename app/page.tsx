@@ -54,7 +54,7 @@ export default function HomePage() {
           }}
         />
         {/* Dark mode gradient override via class not style for cleaner conditional */}
-        <div className="pointer-events-none absolute inset-0 hidden dark:block bg-[radial-gradient(circle_at_50%_50%,transparent_10%,#0A0A0F_90%)]" />
+        <div className="pointer-events-none absolute inset-0 hidden dark:block bg-[radial-gradient(circle_at_50%_50%,transparent_10%,rgba(10,10,15,0.85)_90%)]" />
 
 
         {/* Content */}

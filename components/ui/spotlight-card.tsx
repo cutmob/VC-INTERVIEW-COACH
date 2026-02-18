@@ -60,7 +60,7 @@ export const SpotlightCard = ({
                 className="pointer-events-none absolute -inset-px transition duration-300 opacity-0"
                 style={{
                     opacity,
-                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
+                    background: `radial-gradient(500px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 50%)`,
                 }}
             />
             <div className="relative z-10 h-full w-full">{children}</div>

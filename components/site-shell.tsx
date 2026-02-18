@@ -10,9 +10,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <span className="font-display text-[15px] sm:text-[17px] font-bold tracking-tight text-wood-900">
             Vantive
           </span>
-          <span className="hidden sm:inline rounded-full border border-wood-300 bg-wood-200/50 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-widest text-wood-700">
-            Beta
-          </span>
         </Link>
         <nav className="flex items-center gap-2 sm:gap-5 text-sm font-medium">
           <Link href="/pricing" className="text-wood-600 transition hover:text-wood-900">

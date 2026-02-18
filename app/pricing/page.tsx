@@ -35,7 +35,7 @@ export default function PricingPage() {
           </div>
 
           <div className="mx-auto w-full max-w-md">
-            <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.1)">
+            <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.06)">
               {/* Top glow */}
               <div
                 className="pointer-events-none absolute inset-x-0 top-0 h-px"
