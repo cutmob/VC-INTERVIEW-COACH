@@ -14,10 +14,11 @@ export const UPLOAD_ACCEPT = {
   "image/png": [".png"],
   "image/jpeg": [".jpg", ".jpeg"],
   "image/webp": [".webp"],
-  "image/gif": [".gif"],
 } as const;
 
-export const UPLOAD_MAX_SIZE_MB = 20;
+// Keep well under the WebRTC data channel practical limit.
+// Base64 encoding inflates size ~33%, so 4MB file → ~5.3MB on the wire.
+export const UPLOAD_MAX_SIZE_MB = 4;
 
 /** Session creation parameters tuned for a rapid-fire VC interrogation */
 export const SESSION_CONFIG = {
