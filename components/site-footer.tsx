@@ -47,7 +47,7 @@ export function SiteFooter() {
                 {/* Bottom row: tagline + copyright */}
                 <div className="flex flex-col items-start gap-2 border-t border-wood-200/60 py-5 sm:flex-row sm:items-center sm:justify-between dark:border-white/[0.04]">
                     <p className="font-mono text-[10px] tracking-wide text-wood-400 dark:text-[#3D3A38]">
-                        No accounts · No saved data · One session per key
+                        No accounts · No saved data · Key valid for 24 hours
                     </p>
                     <p className="font-mono text-[10px] text-wood-400 dark:text-[#2C2A29]">
                         © {new Date().getFullYear()} Vantive
