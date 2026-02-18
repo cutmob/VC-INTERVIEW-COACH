@@ -85,7 +85,7 @@ export default function HomePage() {
                 background="var(--btn-glow-mid)"
                 className="shadow-[0_4px_14px_rgba(199,125,77,0.3)] hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] transition-shadow duration-500 dark:shadow-[0_0_30px_rgba(196,122,74,0.3)] dark:hover:shadow-[0_0_50px_rgba(196,122,74,0.5)]"
               >
-                <span className="relative z-10 font-semibold text-white px-2">Pressure-Test My Pitch</span>
+                <span className="relative z-10 font-semibold text-white px-2">Pressure-Test My Pitch — $12</span>
               </ShimmerButton>
             </Link>
 
