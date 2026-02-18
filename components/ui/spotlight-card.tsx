@@ -6,10 +6,12 @@ export const SpotlightCard = ({
     children,
     className = "",
     spotlightColor = "rgba(255, 255, 255, 0.15)",
+    showTopGlow = false,
 }: {
     children: React.ReactNode;
     className?: string;
     spotlightColor?: string;
+    showTopGlow?: boolean;
 }) => {
     const divRef = useRef<HTMLDivElement>(null);
     const [isFocused, setIsFocused] = useState(false);
@@ -56,6 +58,19 @@ export const SpotlightCard = ({
                 className
             )}
         >
+            {/* Top glow line */}
+            {showTopGlow && (
+                <>
+                    <div
+                        className="pointer-events-none absolute inset-x-0 top-0 h-px z-20"
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(199,125,77,0.4), transparent)" }}
+                    />
+                    <div
+                        className="pointer-events-none absolute inset-x-0 top-0 h-px z-20 hidden dark:block"
+                        style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
+                    />
+                </>
+            )}
             <div
                 className="pointer-events-none absolute -inset-px transition duration-300 opacity-0"
                 style={{

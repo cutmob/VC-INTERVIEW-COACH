@@ -16,7 +16,7 @@ export default function PrivacyPage() {
             title: "2. Payment Information",
             content: (
                 <p>
-                    Your payment information is processed entirely by Stripe. We do not store or process your sensitive credit card details on our servers. Stripe acts as our merchant of record and maintains its own secure compliance posture.
+                    Your payment information is processed entirely by <span className="text-[#635BFF]">Stripe</span>. We do not store or process your sensitive credit card details on our servers. <span className="text-[#635BFF]">Stripe</span> acts as our merchant of record and maintains its own secure compliance posture.
                 </p>
             ),
         },

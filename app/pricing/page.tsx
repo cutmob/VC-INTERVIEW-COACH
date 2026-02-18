@@ -35,17 +35,7 @@ export default function PricingPage() {
           </div>
 
           <div className="mx-auto w-full max-w-md">
-            <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.06)">
-              {/* Top glow */}
-              <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-px"
-                style={{ background: "linear-gradient(90deg, transparent, var(--top-glow, rgba(199,125,77,0.4)), transparent)" }}
-              />
-              <div
-                className="pointer-events-none absolute inset-x-0 top-0 h-px hidden dark:block"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
-              />
-
+            <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.06)" showTopGlow>
               <div className="mb-8 flex flex-col items-center border-b border-wood-200 pb-8 dark:border-white/[0.07]">
                 <p className="mb-2 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">Find out if investors would pass — before they do.</p>
                 <span className="font-display text-5xl font-bold text-wood-900 dark:text-wood-900">$12</span>
@@ -65,10 +55,10 @@ export default function PricingPage() {
                 Most founders spend $500+ on pitch coaching. This is the hardest 7 minutes of feedback for the price of lunch.
               </p>
 
-              <CtaButton label="Start Session — $12" />
+              <CtaButton label="Start Session" />
 
               <p className="mt-5 text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
-                Secure checkout via Stripe &middot; No subscription, ever
+                Secure checkout via <span className="text-[#635BFF]">Stripe</span> &middot; No subscription, ever
               </p>
             </SpotlightCard>
           </div>
