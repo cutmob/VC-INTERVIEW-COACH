@@ -9,11 +9,13 @@ export const REALTIME_VOICES = {
 
 export type VoiceGender = keyof typeof REALTIME_VOICES;
 
-/** Accepted file types for pitch material uploads during a session */
+/** Accepted file types for pitch material uploads during a session.
+ *  The Realtime API input_image content type only supports PNG and JPEG.
+ *  Ref: https://platform.openai.com/docs/api-reference/realtime-client-events/conversation/item/create
+ */
 export const UPLOAD_ACCEPT = {
   "image/png": [".png"],
   "image/jpeg": [".jpg", ".jpeg"],
-  "image/webp": [".webp"],
 } as const;
 
 // Keep well under the WebRTC data channel practical limit.
