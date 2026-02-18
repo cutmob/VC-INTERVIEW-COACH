@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { SiteShell } from "@/components/site-shell";
 
 type SessionLookup = { token: string; sessions_remaining: number };
 
-export default function SuccessPage() {
+function SuccessInner() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<SessionLookup | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -82,5 +82,13 @@ export default function SuccessPage() {
         </div>
       </main>
     </SiteShell>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={null}>
+      <SuccessInner />
+    </Suspense>
   );
 }

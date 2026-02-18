@@ -1,13 +1,13 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { SiteShell } from "@/components/site-shell";
 
 type StartSessionResponse = { client_secret?: string; model?: string; error?: string };
 const SESSION_MS = 7 * 60 * 1000;
 
-export default function SessionPage() {
+function SessionInner() {
   const params = useSearchParams();
   const initial = useMemo(() => params.get("token") ?? "", [params]);
   const [token, setToken] = useState(initial);
@@ -145,5 +145,13 @@ export default function SessionPage() {
         </div>
       </main>
     </SiteShell>
+  );
+}
+
+export default function SessionPage() {
+  return (
+    <Suspense fallback={null}>
+      <SessionInner />
+    </Suspense>
   );
 }
