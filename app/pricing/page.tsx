@@ -30,16 +30,13 @@ export default function PricingPage() {
             <p className="mt-5 text-lg text-wood-600 dark:text-wood-600">
               One brutal session. No account. No subscription. Just the 7 minutes that tell you exactly where your pitch breaks.
             </p>
-            <p className="mt-3 text-sm text-wood-500 dark:text-wood-600">
-              Most founders spend $500+ on pitch coaching. This is the hardest feedback for the price of lunch.
-            </p>
           </div>
 
-          <div className="mx-auto w-full max-w-md">
+          <div className="mx-auto w-full max-w-[30rem]">
             <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.06)" showTopGlow>
               <div className="mb-12 flex flex-col items-center border-b border-wood-200 pb-12 dark:border-white/[0.07]">
                 <p className="mb-3 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">Find out if investors would pass — before they do.</p>
-                <span className="font-display text-5xl font-bold text-wood-900 dark:text-wood-900">$12</span>
+                <span className="font-display text-6xl font-bold text-wood-900 dark:text-wood-900">$12</span>
                 <p className="mt-2 font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">one time</p>
               </div>
 
