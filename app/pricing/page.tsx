@@ -4,11 +4,9 @@ import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const included = [
-  "Stops you the moment investors would lose interest",
-  "Exposes weak traction, shaky unit economics, and vague asks",
-  "Pressure-tests your story like a real VC would",
-  "No account needed — one key, one session",
-  "No recordings. Key expires in 24 hours, then it's gone.",
+  "Stops you when investors lose interest",
+  "Exposes weak traction & vague asks",
+  "Pressure-tests your pitch like a real VC",
 ];
 
 export default function PricingPage() {
@@ -32,17 +30,20 @@ export default function PricingPage() {
             <p className="mt-5 text-lg text-wood-600 dark:text-wood-600">
               One brutal session. No account. No subscription. Just the 7 minutes that tell you exactly where your pitch breaks.
             </p>
+            <p className="mt-3 text-sm text-wood-500 dark:text-wood-600">
+              Most founders spend $500+ on pitch coaching. This is the hardest feedback for the price of lunch.
+            </p>
           </div>
 
           <div className="mx-auto w-full max-w-md">
             <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.06)" showTopGlow>
-              <div className="mb-8 flex flex-col items-center border-b border-wood-200 pb-8 dark:border-white/[0.07]">
-                <p className="mb-2 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">Find out if investors would pass — before they do.</p>
+              <div className="mb-12 flex flex-col items-center border-b border-wood-200 pb-12 dark:border-white/[0.07]">
+                <p className="mb-3 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">Find out if investors would pass — before they do.</p>
                 <span className="font-display text-5xl font-bold text-wood-900 dark:text-wood-900">$12</span>
-                <p className="mt-1 font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">one time</p>
+                <p className="mt-2 font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">one time</p>
               </div>
 
-              <ul className="mb-8 space-y-3">
+              <ul className="mb-12 space-y-4">
                 {included.map((item) => (
                   <li key={item} className="flex items-center gap-3 text-sm text-wood-700 dark:text-wood-600">
                     <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-wood-400 shadow-[0_0_6px_rgba(199,125,77,0.4)] dark:bg-wood-400 dark:shadow-[0_0_6px_rgba(196,122,74,0.8)]" />
@@ -51,13 +52,11 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              <p className="mb-5 text-center text-sm text-wood-600 dark:text-wood-600">
-                Most founders spend $500+ on pitch coaching. This is the hardest 7 minutes of feedback for the price of lunch.
-              </p>
+              <div className="mb-12">
+                <CtaButton label="Start Session" />
+              </div>
 
-              <CtaButton label="Start Session" />
-
-              <p className="mt-5 text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
+              <p className="text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
                 Secure checkout via <span className="text-[#635BFF]">Stripe</span> &middot; No subscription, ever
               </p>
             </SpotlightCard>
