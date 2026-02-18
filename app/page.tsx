@@ -98,7 +98,7 @@ export default function HomePage() {
           </div>
 
           {/* Trust line */}
-          <p className="font-mono text-[11px] tracking-wide text-wood-500 animate-fade-in-up dark:text-[#524E4B]" style={{ animationDelay: "0.5s" }}>
+          <p className="mt-1 font-mono text-[11px] tracking-wide text-wood-500 animate-fade-in-up dark:text-[#524E4B]" style={{ animationDelay: "0.5s" }}>
             No account &nbsp;·&nbsp; No recordings &nbsp;·&nbsp; No subscription &nbsp;·&nbsp; Key expires in 24h
           </p>
         </div>
