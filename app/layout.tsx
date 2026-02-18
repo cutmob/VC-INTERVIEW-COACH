@@ -24,13 +24,13 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Vantive — Realtime AI Pitch Coach",
+  title: "Vantive | Venture Capital Interview Coach",
   description:
-    "7 minutes. Live pressure. Practice your pitch and get interrupted by a VC-style AI coach.",
+    "7 minutes. No warm-up. A VC-style AI that interrupts, challenges, and exposes every weak spot in your pitch — before a real investor does.",
   metadataBase: new URL("https://vantive.vercel.app"),
   openGraph: {
-    title: "Vantive — Realtime AI Pitch Coach",
-    description: "7 minutes. Live pressure. No fluff.",
+    title: "Vantive | Venture Capital Interview Coach",
+    description: "Your pitch has holes. Find them first.",
     url: "https://vantive.vercel.app",
     siteName: "Vantive",
   },
