@@ -7,7 +7,7 @@ export default function TermsPage() {
             title: "1. Acceptance of Terms",
             content: (
                 <p>
-                    By accessing or using Vantive ("we," "us," or "our"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. Vantive provides an AI-powered pitch coaching session designed to simulate a venture capital interrogation.
+                    By accessing or using Vantive (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. Vantive provides an AI-powered pitch coaching session designed to simulate a venture capital interrogation.
                 </p>
             ),
         },
@@ -16,7 +16,7 @@ export default function TermsPage() {
             title: "2. Description of Services",
             content: (
                 <p>
-                    Vantive offers realtime voice sessions with an AI coach. Services are provided on a "pay-per-session" basis with single-use access keys. We do not require account registration, and we do not maintain persistent user profiles. Each session is ephemeral and self-contained.
+                    Vantive offers realtime voice sessions with an AI coach. Services are provided on a &ldquo;pay-per-session&rdquo; basis with single-use access keys. We do not require account registration, and we do not maintain persistent user profiles. Each session is ephemeral and self-contained.
                 </p>
             ),
         },
@@ -42,7 +42,7 @@ export default function TermsPage() {
             title: "4. Third-Party AI Integration",
             content: (
                 <p>
-                    Vantive utilizes OpenAI's API to generate responses. By using our service, you acknowledge that your voice and text inputs are processed by OpenAI. While we configure our usage to maximize privacy (opting out of training where applicable for enterprise endpoints), OpenAI has its own terms and policies which govern their data handling. We encourage you to review OpenAI's policies linked below.
+                    Vantive utilizes OpenAI&apos;s API to generate responses. By using our service, you acknowledge that your voice and text inputs are processed by OpenAI. While we configure our usage to maximize privacy (opting out of training where applicable for enterprise endpoints), OpenAI has its own terms and policies which govern their data handling. We encourage you to review OpenAI&apos;s policies linked below.
                 </p>
             ),
         },
@@ -51,7 +51,7 @@ export default function TermsPage() {
             title: "5. No Warranty & Disclaimer",
             content: (
                 <p>
-                    The services are provided "as is" and "as available" without any warranties of any kind, express or implied. We do not guarantee that the AI coach will provide accurate, useful, or professional advice. The "interrogation" style is a simulation and should not be taken as professional financial or legal advice.
+                    The services are provided &ldquo;as is&rdquo; and &ldquo;as available&rdquo; without any warranties of any kind, express or implied. We do not guarantee that the AI coach will provide accurate, useful, or professional advice. The &ldquo;interrogation&rdquo; style is a simulation and should not be taken as professional financial or legal advice.
                 </p>
             ),
         },

@@ -43,10 +43,10 @@ export default function PrivacyPage() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        When you engage with our AI coach, your voice is transmitted via WebRTC directly to OpenAI's Realtime API for processing. OpenAI acts as a data processor for these interactions.
+                        When you engage with our AI coach, your voice is transmitted via WebRTC directly to OpenAI&apos;s Realtime API for processing. OpenAI acts as a data processor for these interactions.
                     </p>
                     <p>
-                        While we configure our integration to maximize privacy (e.g., using endpoints that default to not training on API data where available for our tier), OpenAI's retention policies apply to the data while it is in their systems. Their systems process audio to text and generate responses. We do not retain copies of these interactions.
+                        While we configure our integration to maximize privacy (e.g., using endpoints that default to not training on API data where available for our tier), OpenAI&apos;s retention policies apply to the data while it is in their systems. Their systems process audio to text and generate responses. We do not retain copies of these interactions.
                     </p>
                     <p>
                         You should review OpenAI&apos;s API data usage policies to understand how they handle data transiently during processing.
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
             title: "6. Questions",
             content: (
                 <p>
-                    Since we do not store user data, we cannot modify or "delete" your account because no account exists. If you have questions about our minimal data practices, please contact us.
+                    Since we do not store user data, we cannot modify or &quot;delete&quot; your account because no account exists. If you have questions about our minimal data practices, please contact us.
                 </p>
             ),
         },

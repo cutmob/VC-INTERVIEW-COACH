@@ -109,7 +109,7 @@ export function LegalLayout({ title, subtitle, sections }: LegalLayoutProps) {
                         </h2>
                         <div className="text-wood-700 dark:text-wood-400">
                             <p>
-                                Vantive utilizes OpenAI's API for its core functionality. We do not control their data processing policies, but we select enterprise-grade endpoints that do not train on your data by default. We encourage you to review their policies directly.
+                                Vantive utilizes OpenAI&apos;s API for its core functionality. We do not control their data processing policies, but we select enterprise-grade endpoints that do not train on your data by default. We encourage you to review their policies directly.
                             </p>
                             <div className="mt-4">
                                 <a
