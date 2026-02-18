@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auditLog } from "@/lib/audit-log";
-import { REALTIME_MODEL, SYSTEM_PROMPT } from "@/lib/constants";
+import { REALTIME_MODEL, REALTIME_VOICES, SESSION_CONFIG, SYSTEM_PROMPT, type VoiceGender } from "@/lib/constants";
 import { rateLimit } from "@/lib/rate-limiter";
 import { isValidTokenFormat, normalizeToken } from "@/lib/sanitize-input";
 import { getToken, setTokenConsumed } from "@/lib/token";
@@ -17,13 +17,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Too many requests", retryAfter: allowed.retryAfter }, { status: 429 });
   }
 
-  let payload: { token?: string };
+  let payload: { token?: string; voice?: string };
   try {
-    payload = (await req.json()) as { token?: string };
+    payload = (await req.json()) as { token?: string; voice?: string };
   } catch {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
   const token = normalizeToken(payload.token ?? "");
+  const voiceGender: VoiceGender = payload.voice === "female" ? "female" : "male";
+  const voice = REALTIME_VOICES[voiceGender];
 
   if (!isValidTokenFormat(token)) {
     return NextResponse.json({ error: "Invalid token format" }, { status: 400 });
@@ -84,10 +86,10 @@ export async function POST(req: NextRequest) {
       },
       body: JSON.stringify({
         model: REALTIME_MODEL,
-        voice: "alloy",
+        voice,
         instructions: SYSTEM_PROMPT,
-        max_output_tokens: 150,
-        modalities: ["audio", "text"]
+        modalities: ["audio", "text"],
+        ...SESSION_CONFIG,
       })
     });
 

@@ -43,7 +43,7 @@ export default function HomePage() {
 
         {/* Animated canvas background (Light Mode Only) */}
         <div className="absolute inset-0 dark:hidden pointer-events-none">
-          <BackgroundBeamsLight className="opacity-50" />
+          <BackgroundBeamsLight className="opacity-60" />
         </div>
 
         {/* Subtle radial gradient to center focus */}

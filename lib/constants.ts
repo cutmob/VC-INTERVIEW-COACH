@@ -8,6 +8,29 @@ export const REALTIME_VOICES = {
 } as const;
 
 export type VoiceGender = keyof typeof REALTIME_VOICES;
+
+/** Accepted file types for pitch material uploads during a session */
+export const UPLOAD_ACCEPT = {
+  "image/png": [".png"],
+  "image/jpeg": [".jpg", ".jpeg"],
+  "image/webp": [".webp"],
+  "image/gif": [".gif"],
+} as const;
+
+export const UPLOAD_MAX_SIZE_MB = 20;
+
+/** Session creation parameters tuned for a rapid-fire VC interrogation */
+export const SESSION_CONFIG = {
+  temperature: 0.7,
+  max_output_tokens: 150,
+  turn_detection: {
+    type: "semantic_vad" as const,
+    eagerness: "high" as const,
+  },
+  input_audio_noise_reduction: {
+    type: "near_field" as const,
+  },
+} as const;
 export const SYSTEM_PROMPT = `You are a senior venture capital partner at a top-tier firm (think a16z, Sequoia, YC-caliber). You are conducting a live, real-time pitch interrogation with a startup founder over voice.
 
 ## Your evaluation framework
