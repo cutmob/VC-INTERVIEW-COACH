@@ -43,5 +43,5 @@ export async function hasWebhookBeenProcessed(id: string): Promise<boolean> {
 }
 
 export async function markWebhookProcessed(id: string) {
-  await idempotencyStore.set(id, "1", { expirationTtl: 60 * 60 * 24 * 7 });
+  await idempotencyStore.set(id, "1");
 }

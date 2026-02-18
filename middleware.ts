@@ -5,9 +5,13 @@ export function middleware(req: NextRequest) {
   res.headers.set("X-Frame-Options", "DENY");
   res.headers.set("X-Content-Type-Options", "nosniff");
   res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  const isDev = process.env.NODE_ENV === "development";
+  const scriptSrc = isDev
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com"
+    : "script-src 'self' 'unsafe-inline' https://js.stripe.com";
   res.headers.set(
     "Content-Security-Policy",
-    "default-src 'self'; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; media-src 'self' blob:;"
+    `default-src 'self'; connect-src 'self' https://api.openai.com wss://api.openai.com https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; ${scriptSrc}; style-src 'self' 'unsafe-inline'; media-src 'self' blob:;`
   );
   res.headers.set("Permissions-Policy", "microphone=(self)");
 

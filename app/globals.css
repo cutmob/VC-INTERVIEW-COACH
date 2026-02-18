@@ -4,16 +4,115 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    /* "Wood" Theme (Light Mode) */
+    --background: 249 247 242;
+    /* #F9F7F2 */
+    --foreground: 8 8 16;
+    /* #080810 */
+
+    --wood-50: 249 247 242;
+    --wood-100: 244 241 237;
+    --wood-200: 234 226 216;
+    --wood-300: 217 182 140;
+    --wood-400: 199 125 77;
+    --wood-500: 160 82 45;
+    --wood-600: 139 69 19;
+    --wood-700: 93 64 55;
+    --wood-800: 62 39 35;
+    --wood-900: 44 62 80;
+
+    --brand-50: 249 247 242;
+    --brand-100: 244 241 237;
+    --brand-200: 234 226 216;
+    --brand-300: 217 182 140;
+    --brand-400: 199 125 77;
+    --brand-500: 199 125 77;
+    --brand-600: 160 82 45;
+    --brand-700: 93 64 55;
+    --brand-800: 62 39 35;
+    --brand-900: 44 62 80;
+
+    --btn-glow-start: #D9B68C;
+    --btn-glow-mid: #C77D4D;
+    --btn-glow-end: #A0522D;
+    --btn-bg: #F9F7F2;
+
+    --selection-bg: rgba(199, 125, 77, 0.3);
+    --selection-text: #2C3E50;
+  }
+
+  .dark {
+    /*
+     * Dark Theme — Warm Copper (Cohesive)
+     *
+     * 60-30-10 rule:
+     *   60% — Dark background (#0A0A0F) & surfaces
+     *   30% — Warm off-white text (#E8E0D8) & warm gray secondary (#9B918A)
+     *   10% — Desaturated copper accent (#D4976A / #C47A4A)
+     *
+     * All accent colors share the same ~25° hue family.
+     * Text uses warm-tinted neutrals, not cold zinc.
+     * Accent desaturated ~20pts per Material dark mode guidance.
+     */
+    --background: 10 10 15;
+    /* #0A0A0F — slightly warm near-black */
+    --foreground: 232 224 216;
+    /* #E8E0D8 — warm off-white */
+
+    --wood-50: 10 10 15;
+    /* bg — dark background */
+    --wood-100: 255 255 255;
+    /* bg-wood-100 -> used with /[0.05] alpha */
+    --wood-200: 255 255 255;
+    /* border-wood-200 -> used with /[0.1] alpha */
+    --wood-300: 212 151 106;
+    /* accent light — #D4976A (labels, highlights) */
+    --wood-400: 196 122 74;
+    /* accent mid — #C47A4A (buttons) */
+    --wood-500: 166 98 58;
+    /* accent deep — #A6623A (hover states) */
+    --wood-600: 155 145 138;
+    /* secondary text — #9B918A (warm gray) */
+    --wood-700: 210 200 192;
+    /* primary text alt — #D2C8C0 */
+    --wood-800: 232 224 216;
+    /* primary text — #E8E0D8 */
+    --wood-900: 240 235 230;
+    /* headings — #F0EBE6 (warm white) */
+
+    --brand-50: 255 247 237;
+    --brand-100: 255 237 213;
+    --brand-200: 240 200 168;
+    --brand-300: 212 151 106;
+    --brand-400: 196 122 74;
+    --brand-500: 166 98 58;
+    --brand-600: 140 80 44;
+    --brand-700: 115 62 30;
+    --brand-800: 90 46 20;
+    --brand-900: 70 34 12;
+
+    --btn-glow-start: #D4976A;
+    --btn-glow-mid: #C47A4A;
+    --btn-glow-end: #A6623A;
+    --btn-bg: #0A0A0F;
+
+    --selection-bg: rgba(196, 122, 74, 0.35);
+    --selection-text: #F0EBE6;
   }
 
   body {
-    @apply min-h-screen bg-[#080810] text-zinc-100 antialiased;
+    @apply min-h-screen bg-wood-50 text-wood-900 antialiased transition-colors duration-300;
+    /* Wood texture only in light mode */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .dark body {
+    background-image: none;
   }
 
   ::selection {
-    background: rgba(139, 92, 246, 0.35);
-    color: white;
+    background: var(--selection-bg);
+    color: var(--selection-text);
   }
 }
 
@@ -36,42 +135,38 @@
   .glow-btn-wrap::before {
     content: "";
     position: absolute;
-    inset: -2px;
+    inset: -1px;
     border-radius: 9999px;
-    background: conic-gradient(
-      from var(--angle, 0deg),
-      transparent 0%,
-      transparent 40%,
-      #a78bfa 50%,
-      #7c3aed 55%,
-      #c4b5fd 60%,
-      transparent 70%,
-      transparent 100%
-    );
+    background: conic-gradient(from var(--angle, 0deg),
+        transparent 0%,
+        transparent 40%,
+        var(--btn-glow-start) 50%,
+        var(--btn-glow-mid) 55%,
+        var(--btn-glow-end) 60%,
+        transparent 70%,
+        transparent 100%);
     animation: spin-glow 2.4s linear infinite;
     z-index: 0;
-    filter: blur(3px);
-    opacity: 0.85;
+    filter: blur(2px);
+    opacity: 0.75;
   }
 
   .glow-btn-wrap::after {
     content: "";
     position: absolute;
-    inset: -4px;
+    inset: -2px;
     border-radius: 9999px;
-    background: conic-gradient(
-      from var(--angle, 0deg),
-      transparent 0%,
-      transparent 45%,
-      #7c3aed 55%,
-      #a78bfa 60%,
-      transparent 68%,
-      transparent 100%
-    );
+    background: conic-gradient(from var(--angle, 0deg),
+        transparent 0%,
+        transparent 45%,
+        var(--btn-glow-mid) 55%,
+        var(--btn-glow-start) 60%,
+        transparent 68%,
+        transparent 100%);
     animation: spin-glow 2.4s linear infinite;
     z-index: 0;
-    filter: blur(8px);
-    opacity: 0.5;
+    filter: blur(4px);
+    opacity: 0.35;
   }
 
   .glow-btn-inner {
@@ -79,7 +174,7 @@
     z-index: 1;
     display: block;
     border-radius: 9999px;
-    background: #080810;
+    background: var(--btn-bg);
   }
 }
 

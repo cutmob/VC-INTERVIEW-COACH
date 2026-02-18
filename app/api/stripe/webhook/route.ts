@@ -4,7 +4,7 @@ import { auditLog } from "@/lib/audit-log";
 import { generateToken, hasWebhookBeenProcessed, markWebhookProcessed, saveToken } from "@/lib/token";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
-  apiVersion: "2024-06-20"
+  apiVersion: "2025-02-24.acacia"
 });
 
 export async function POST(req: NextRequest) {

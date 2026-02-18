@@ -1,19 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import ShimmerButton from "@/components/ui/shimmer-button";
 
-type CtaButtonProps = {
-  label?: string;
-};
-
-export function CtaButton({ label = "$12 — Enter the Room" }: CtaButtonProps) {
+export function CtaButton({ label = "$12 — Buy Access Key" }: { label?: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const startCheckout = async () => {
     setError(null);
     setLoading(true);
-
     try {
       const res = await fetch("/api/stripe/checkout", { method: "POST" });
       const data = (await res.json()) as { url?: string; error?: string };
@@ -30,15 +26,23 @@ export function CtaButton({ label = "$12 — Enter the Room" }: CtaButtonProps) 
   };
 
   return (
-    <div className="flex w-full max-w-sm flex-col gap-2">
-      <button
+    <div className="flex w-full flex-col gap-2">
+      <ShimmerButton
         onClick={startCheckout}
         disabled={loading}
-        className="rounded-md bg-white px-6 py-3 text-sm font-semibold text-black transition hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-60"
+        className="w-full text-sm font-semibold text-white shadow-[0_4px_14px_rgba(199,125,77,0.35)] disabled:cursor-not-allowed disabled:opacity-50 dark:shadow-[0_0_30px_rgba(196,122,74,0.35)] dark:text-white"
+        shimmerColor="var(--btn-glow-start)"
+        shimmerSize="2px"
+        borderRadius="9999px"
+        background="var(--btn-glow-mid)"
       >
-        {loading ? "Redirecting..." : label}
-      </button>
-      {error ? <p className="text-center text-sm text-red-400">{error}</p> : null}
+        <span className="relative z-10 px-8 py-1">
+          {loading ? "Redirecting to checkout..." : label}
+        </span>
+      </ShimmerButton>
+      {error && (
+        <p className="text-center font-mono text-xs text-red-600">{error}</p>
+      )}
     </div>
   );
 }
