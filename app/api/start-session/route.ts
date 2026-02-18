@@ -8,7 +8,7 @@ import { withTokenLock } from "@/lib/token-lock";
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  const allowed = rateLimit(`start-session:${ip}`);
+  const allowed = await rateLimit(`start-session:${ip}`);
 
   if (!allowed.ok) {
     auditLog("rate_limited", { endpoint: "start-session", ip });

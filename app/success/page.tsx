@@ -27,8 +27,8 @@ function SuccessInner() {
 
   return (
     <SiteShell>
-      <main className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center py-12 text-center">
-        <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-10 backdrop-blur-sm">
+      <main className="mx-auto flex w-full max-w-lg flex-1 flex-col items-center justify-center px-0 py-8 sm:py-12 text-center">
+        <div className="relative w-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-6 sm:p-10 backdrop-blur-sm">
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-px"
             style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}

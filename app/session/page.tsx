@@ -84,8 +84,8 @@ function SessionInner() {
 
   return (
     <SiteShell>
-      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center py-10">
-        <div className="relative overflow-hidden rounded-2xl border border-wood-200 bg-wood-100 p-9 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:backdrop-blur-sm dark:shadow-none">
+      <main className="mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-0 py-6 sm:py-10">
+        <div className="relative overflow-hidden rounded-2xl border border-wood-200 bg-wood-100 p-5 sm:p-9 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:backdrop-blur-sm dark:shadow-none">
           <div
             className="pointer-events-none absolute inset-x-0 top-0 h-px"
             style={{ background: "linear-gradient(90deg, transparent, rgba(199,125,77,0.4), transparent)" }}
@@ -99,7 +99,7 @@ function SessionInner() {
             <p className="mb-1 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
               Session Room
             </p>
-            <h1 className="heading-display text-3xl text-wood-900 dark:text-wood-900">Live Pitch Room</h1>
+            <h1 className="heading-display text-2xl sm:text-3xl text-wood-900 dark:text-wood-900">Live Pitch Room</h1>
           </div>
 
           {running && secondsLeft !== null && (

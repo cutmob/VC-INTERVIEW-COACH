@@ -13,21 +13,18 @@ export default function HomePage() {
 
       {/* ── Nav ── */}
       <header className="fixed inset-x-0 top-0 z-50 bg-wood-50/80 dark:bg-[#0A0A0F]/80 backdrop-blur-md border-b border-wood-200/50 dark:border-white/5 transition-colors duration-300">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
-          <Link href="/" className="flex items-baseline gap-2">
-            <span className="font-display text-[17px] font-bold tracking-tight text-wood-900 dark:text-wood-900">
+        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" className="flex items-baseline gap-1.5 sm:gap-2">
+            <span className="font-display text-[15px] sm:text-[17px] font-bold tracking-tight text-wood-900 dark:text-wood-900">
               Vantive
             </span>
-            <span className="rounded-full border border-wood-300 bg-wood-200/50 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-widest text-wood-700 dark:border-wood-400/30 dark:bg-wood-400/10 dark:text-wood-300">
-              Beta
-            </span>
           </Link>
-          <nav className="flex items-center gap-5 text-sm font-medium">
+          <nav className="flex items-center gap-2 sm:gap-5 text-sm font-medium">
             <Link href="/pricing" className="text-wood-600 transition hover:text-wood-900 dark:text-wood-600 dark:hover:text-wood-900">
               Pricing
             </Link>
             <Link href="/session" className="overflow-hidden rounded-full">
-              <ShimmerButton className="h-8 px-5 py-1 text-xs shadow-sm dark:shadow-none overflow-hidden" shimmerColor="var(--btn-glow-start)" shimmerSize="2px" borderRadius="100px" background="var(--btn-bg)">
+              <ShimmerButton className="h-8 px-3 sm:px-5 py-1 text-xs shadow-sm dark:shadow-none overflow-hidden" shimmerColor="var(--btn-glow-start)" shimmerSize="2px" borderRadius="100px" background="var(--btn-bg)">
                 <span className="relative z-10 text-wood-900 group-hover:text-wood-700 transition-colors dark:text-wood-800 dark:group-hover:text-wood-900">Enter Session</span>
               </ShimmerButton>
             </Link>
@@ -37,7 +34,7 @@ export default function HomePage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative z-0 flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-14">
+      <section className="relative z-0 flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-14">
 
         {/* Animated canvas background (Dark Mode Only) */}
         <div className="absolute inset-0 hidden dark:block pointer-events-none">
@@ -59,7 +56,7 @@ export default function HomePage() {
         <div className="relative z-10 flex flex-col items-center gap-7 text-center">
 
           {/* Headline */}
-          <h1 className="heading-display max-w-[820px] text-[clamp(48px,8vw,96px)] leading-[1.0] text-wood-900 animate-fade-in-up dark:text-wood-900" style={{ animationDelay: "0.2s" }}>
+          <h1 className="heading-display max-w-[820px] text-[clamp(32px,8vw,96px)] leading-[1.0] text-wood-900 animate-fade-in-up dark:text-wood-900" style={{ animationDelay: "0.2s" }}>
             Practice your pitch.
             <br />
             <span
@@ -70,7 +67,7 @@ export default function HomePage() {
           </h1>
 
           {/* Sub */}
-          <p className="max-w-[480px] text-[17px] leading-relaxed text-wood-700/80 animate-fade-in-up dark:text-wood-600" style={{ animationDelay: "0.3s" }}>
+          <p className="max-w-[480px] text-[15px] sm:text-[17px] leading-relaxed text-wood-700/80 animate-fade-in-up dark:text-wood-600" style={{ animationDelay: "0.3s" }}>
             7 minutes of live pressure from a VC-style AI that cuts weak
             framing, demands specificity, and gives zero praise.
           </p>
@@ -106,22 +103,22 @@ export default function HomePage() {
 
       {/* ── Stats strip ── */}
       <div className="relative z-10 border-y border-wood-200 bg-wood-100/50 backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.02]">
-        <div className="mx-auto grid max-w-4xl grid-cols-3 divide-x divide-wood-200 px-6 dark:divide-white/5">
+        <div className="mx-auto grid max-w-4xl grid-cols-3 divide-x divide-wood-200 px-4 sm:px-6 dark:divide-white/5">
           {[
             ["7 min", "Timed session"],
             ["$12", "One-time, no sub"],
             ["1 key", "Single use token"],
           ].map(([val, label]) => (
-            <div key={label} className="flex flex-col items-center gap-1 py-7">
-              <span className="font-display text-2xl font-bold text-wood-900 dark:text-wood-900">{val}</span>
-              <span className="font-mono text-[11px] text-wood-600 dark:text-wood-600">{label}</span>
+            <div key={label} className="flex flex-col items-center gap-1 py-5 sm:py-7">
+              <span className="font-display text-lg sm:text-2xl font-bold text-wood-900 dark:text-wood-900">{val}</span>
+              <span className="font-mono text-[9px] sm:text-[11px] text-wood-600 dark:text-wood-600">{label}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* ── How it works ── */}
-      <section className="relative px-6 py-28 overflow-hidden bg-wood-50 dark:bg-transparent">
+      <section className="relative px-4 sm:px-6 py-16 sm:py-28 overflow-hidden bg-wood-50 dark:bg-transparent">
         {/* Section glow */}
         <div
           className="pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2"
@@ -135,10 +132,10 @@ export default function HomePage() {
               What happens when you start
             </span>
           </div>
-          <h2 className="heading-display mb-6 text-center text-3xl text-wood-900 sm:text-4xl dark:text-wood-900">
+          <h2 className="heading-display mb-6 text-center text-2xl text-wood-900 sm:text-4xl dark:text-wood-900">
             Most founders fumble in the first 60 seconds.
           </h2>
-          <p className="mx-auto mb-16 max-w-xl text-center text-[15px] leading-relaxed text-wood-600 dark:text-wood-600">
+          <p className="mx-auto mb-10 sm:mb-16 max-w-xl text-center text-[14px] sm:text-[15px] leading-relaxed text-wood-600 dark:text-wood-600">
             Real VCs decide in minutes whether to keep listening. This session replicates that pressure so you never waste a real meeting again.
           </p>
 
@@ -178,7 +175,7 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA section ── */}
-      <section className="relative overflow-hidden px-6 py-32 text-center">
+      <section className="relative overflow-hidden px-4 sm:px-6 py-20 sm:py-32 text-center">
         <div
           className="pointer-events-none absolute inset-0 dark:hidden"
           style={{
@@ -202,7 +199,7 @@ export default function HomePage() {
         />
 
         <div className="relative z-10 mx-auto max-w-2xl space-y-8">
-          <h2 className="heading-display text-4xl text-wood-900 sm:text-5xl dark:text-wood-900">
+          <h2 className="heading-display text-3xl text-wood-900 sm:text-5xl dark:text-wood-900">
             Ready to be challenged?
           </h2>
           <p className="text-wood-700 text-lg dark:text-wood-600">

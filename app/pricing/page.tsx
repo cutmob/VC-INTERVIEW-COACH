@@ -21,12 +21,12 @@ export default function PricingPage() {
           <BackgroundBeams className="opacity-20" />
         </div>
 
-        <main className="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center py-16">
-          <div className="mb-14 text-center">
+        <main className="relative z-10 mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center py-10 sm:py-16">
+          <div className="mb-10 sm:mb-14 text-center">
             <p className="mb-4 font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
               Pricing
             </p>
-            <h1 className="heading-display text-4xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
+            <h1 className="heading-display text-3xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
               One session. One key.
             </h1>
             <p className="mt-5 text-lg text-wood-600 dark:text-wood-600">
@@ -35,7 +35,7 @@ export default function PricingPage() {
           </div>
 
           <div className="mx-auto w-full max-w-md">
-            <SpotlightCard className="flex-col !items-stretch p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.1)">
+            <SpotlightCard className="flex-col !items-stretch p-5 sm:p-9 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.04] dark:border-white/10 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.1)">
               {/* Top glow */}
               <div
                 className="pointer-events-none absolute inset-x-0 top-0 h-px"

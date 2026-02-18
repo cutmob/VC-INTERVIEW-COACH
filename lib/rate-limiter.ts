@@ -1,32 +1,20 @@
-const WINDOW_MS = 60_000;
+import { getRedis } from "@/lib/redis";
+
+const WINDOW_SEC = 60;
 const MAX_REQUESTS = 30;
 
-type Entry = { count: number; resetAt: number };
-const store = new Map<string, Entry>();
+export async function rateLimit(key: string): Promise<{ ok: boolean; retryAfter?: number }> {
+  const redisKey = `rl:${key}`;
+  const count = await getRedis().incr(redisKey);
 
-export function rateLimit(key: string): { ok: boolean; retryAfter?: number } {
-  const now = Date.now();
-  const current = store.get(key);
-
-  if (!current || current.resetAt <= now) {
-    store.set(key, { count: 1, resetAt: now + WINDOW_MS });
-    return { ok: true };
+  if (count === 1) {
+    await getRedis().expire(redisKey, WINDOW_SEC);
   }
 
-  if (current.count >= MAX_REQUESTS) {
-    return { ok: false, retryAfter: Math.ceil((current.resetAt - now) / 1000) };
+  if (count > MAX_REQUESTS) {
+    const ttl = await getRedis().ttl(redisKey);
+    return { ok: false, retryAfter: ttl > 0 ? ttl : WINDOW_SEC };
   }
 
-  current.count += 1;
-  store.set(key, current);
   return { ok: true };
 }
-
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, entry] of store.entries()) {
-    if (entry.resetAt <= now) {
-      store.delete(key);
-    }
-  }
-}, WINDOW_MS).unref();

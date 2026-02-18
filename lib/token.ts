@@ -24,7 +24,8 @@ export async function saveToken(token: string, value: SessionToken) {
   if (!TOKEN_REGEX.test(token)) {
     throw new Error("Invalid token format");
   }
-  await getRedis().set(`token:${token}`, JSON.stringify(value));
+  // Token expires in 24 hours, matching the business logic
+  await getRedis().set(`token:${token}`, JSON.stringify(value), "EX", 86400);
 }
 
 export async function getToken(token: string): Promise<SessionToken | null> {

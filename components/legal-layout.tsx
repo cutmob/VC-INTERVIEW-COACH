@@ -53,12 +53,12 @@ export function LegalLayout({ title, subtitle, sections }: LegalLayoutProps) {
 
     return (
         <SiteShell>
-            <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-12 py-12 lg:flex-row lg:gap-24">
+            <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-8 sm:gap-12 py-8 sm:py-12 lg:flex-row lg:gap-24">
 
                 {/* Sidebar Navigation (Sticky) */}
                 <aside className="static top-32 flex-shrink-0 lg:sticky lg:h-[calc(100vh-8rem)] lg:w-64">
-                    <div className="mb-8">
-                        <h1 className="heading-display text-3xl font-bold text-wood-900 dark:text-wood-900">
+                    <div className="mb-6 sm:mb-8">
+                        <h1 className="heading-display text-2xl sm:text-3xl font-bold text-wood-900 dark:text-wood-900">
                             {title}
                         </h1>
                         <p className="mt-2 text-sm text-wood-600 dark:text-wood-600">
@@ -84,8 +84,21 @@ export function LegalLayout({ title, subtitle, sections }: LegalLayoutProps) {
                     </nav>
 
                     {/* Mobile Dropdown / List (Simple for now, just stack) */}
-                    <div className="lg:hidden">
-                        {/* Mobile users just scroll, no need for complex nav here usually, but could add anchor links spread out if needed. keeping simple. */}
+                    <div className="flex flex-wrap gap-2 lg:hidden">
+                        {sections.map(({ id, title }) => (
+                            <button
+                                key={id}
+                                onClick={() => scrollToSection(id)}
+                                className={cn(
+                                    "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+                                    activeSection === id
+                                        ? "bg-wood-400/20 text-wood-900 dark:bg-wood-400/10 dark:text-wood-300"
+                                        : "text-wood-500 hover:text-wood-700 dark:text-wood-600 dark:hover:text-wood-400"
+                                )}
+                            >
+                                {title}
+                            </button>
+                        ))}
                     </div>
                 </aside>
 
