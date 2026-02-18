@@ -1,4 +1,4 @@
-import { Redis } from "@upstash/redis";
+import { getRedis } from "@/lib/redis";
 import { TOKEN_REGEX } from "@/lib/constants";
 
 export type SessionToken = {
@@ -10,15 +10,6 @@ export type SessionToken = {
 };
 
 const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-
-let _redis: Redis | null = null;
-function redis() {
-  if (!_redis) _redis = new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL!,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN!,
-  });
-  return _redis;
-}
 
 export function generateToken() {
   const part = () =>
@@ -33,22 +24,23 @@ export async function saveToken(token: string, value: SessionToken) {
   if (!TOKEN_REGEX.test(token)) {
     throw new Error("Invalid token format");
   }
-  await redis().set(`token:${token}`, value);
+  await getRedis().set(`token:${token}`, JSON.stringify(value));
 }
 
 export async function getToken(token: string): Promise<SessionToken | null> {
-  return redis().get<SessionToken>(`token:${token}`);
+  const raw = await getRedis().get(`token:${token}`);
+  return raw ? (JSON.parse(raw) as SessionToken) : null;
 }
 
 export async function setTokenConsumed(token: string, value: SessionToken) {
-  await redis().set(`token:${token}`, value);
+  await getRedis().set(`token:${token}`, JSON.stringify(value));
 }
 
 export async function hasWebhookBeenProcessed(id: string): Promise<boolean> {
-  const val = await redis().get<string>(`webhook:${id}`);
+  const val = await getRedis().get(`webhook:${id}`);
   return val === "1";
 }
 
 export async function markWebhookProcessed(id: string) {
-  await redis().set(`webhook:${id}`, "1", { ex: 86400 });
+  await getRedis().set(`webhook:${id}`, "1", "EX", 86400);
 }

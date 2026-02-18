@@ -11,6 +11,7 @@ function SuccessInner() {
   const searchParams = useSearchParams();
   const [data, setData] = useState<SessionLookup | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const sessionId = searchParams.get("session_id");
@@ -61,11 +62,22 @@ function SuccessInner() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-white/[0.07] bg-black/30 px-6 py-4">
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(data.token);
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 2000);
+                }}
+                className="group relative w-full cursor-pointer rounded-xl border border-wood-200 bg-wood-100/50 px-6 py-4 transition hover:border-wood-400 dark:border-white/[0.07] dark:bg-black/30 dark:hover:border-wood-400/40"
+                aria-label="Copy access key to clipboard"
+              >
                 <p className="font-mono text-xl font-bold tracking-[0.15em] text-wood-900">
                   {data.token}
                 </p>
-              </div>
+                <span className="mt-2 block font-mono text-[10px] text-wood-500 transition group-hover:text-wood-700 dark:text-[#524E4B] dark:group-hover:text-wood-300">
+                  {copied ? "Copied!" : "Click to copy"}
+                </span>
+              </button>
 
               <Link
                 href={`/session?token=${data.token}`}
