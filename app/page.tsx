@@ -107,7 +107,7 @@ export default function HomePage() {
 
       {/* ── Stats strip — reframed around value ── */}
       <div className="relative z-10 border-y border-wood-200 bg-wood-100/50 backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.02]">
-        <div className="mx-auto grid max-w-4xl grid-cols-3 divide-x divide-wood-200 px-4 sm:px-6 dark:divide-white/5">
+        <div className="mx-auto grid max-w-4xl grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 divide-x-0 sm:divide-x divide-wood-200 px-4 sm:px-6 dark:divide-white/5">
           {[
             ["7 min", "Harder than most real VC meetings"],
             ["$12", "vs. $500+ for a pitch coach"],
