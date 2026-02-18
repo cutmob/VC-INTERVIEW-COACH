@@ -255,7 +255,7 @@ export default function HomePage() {
                 background="var(--btn-glow-mid)"
                 className="shadow-[0_4px_14px_rgba(199,125,77,0.3)] hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] transition-shadow duration-500 py-4 px-10 dark:shadow-[0_0_40px_rgba(196,122,74,0.4)] dark:hover:shadow-[0_0_60px_rgba(196,122,74,0.6)]"
               >
-                <span className="relative z-10 font-bold text-white text-base">Start My Mock VC Session — $12</span>
+                <span className="relative z-10 font-bold text-white text-base">Pressure-Test My Pitch</span>
               </ShimmerButton>
             </Link>
           </div>
