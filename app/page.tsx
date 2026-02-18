@@ -203,10 +203,10 @@ export default function HomePage() {
               },
             ].map(({ quote, who }) => (
               <div key={who} className="rounded-xl border border-wood-200 bg-wood-100/50 p-6 sm:p-8 dark:border-white/5 dark:bg-white/[0.02]">
-                <p className="text-sm leading-relaxed text-wood-700 dark:text-wood-600 italic">
+                <p className="text-sm leading-relaxed text-wood-700 dark:text-wood-900 italic">
                   &ldquo;{quote}&rdquo;
                 </p>
-                <p className="mt-4 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">
+                <p className="mt-4 font-mono text-[11px] text-wood-500 dark:text-wood-800">
                   — {who}
                 </p>
               </div>
