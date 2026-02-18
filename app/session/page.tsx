@@ -117,6 +117,37 @@ function SessionInner() {
   }, [sendImage]);
 
   const start = async () => {
+    // 1. Request microphone BEFORE consuming the token
+    setStatus("Requesting microphone access…");
+    let media: MediaStream;
+    try {
+      media = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      if (err instanceof DOMException) {
+        if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
+          setStatus("No microphone detected. Please connect one and try again.");
+          return;
+        }
+        if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+          // Distinguish dismissed vs blocked (Chromium quirk)
+          try {
+            const permStatus = await navigator.permissions.query({ name: "microphone" as PermissionName });
+            if (permStatus.state === "denied") {
+              setStatus("Microphone blocked. Click the lock icon in your address bar to allow access, then try again.");
+            } else {
+              setStatus("Microphone access is required for the session. Please allow it and try again.");
+            }
+          } catch {
+            setStatus("Microphone access is required for the session. Please allow it and try again.");
+          }
+          return;
+        }
+      }
+      setStatus("Unable to access microphone. Please check your device settings.");
+      return;
+    }
+
+    // 2. Validate token and create session
     setStatus("Validating token…");
     const res = await fetch("/api/start-session", {
       method: "POST",
@@ -125,12 +156,13 @@ function SessionInner() {
     });
     const data = (await res.json()) as StartSessionResponse;
     if (!res.ok || !data.client_secret || !data.model) {
+      media.getTracks().forEach((t) => t.stop());
       setStatus(data.error ?? "Unable to start session");
       return;
     }
+
+    // 3. Establish WebRTC connection
     try {
-      setStatus("Requesting microphone access…");
-      const media = await navigator.mediaDevices.getUserMedia({ audio: true });
       const pc = new RTCPeerConnection();
       micStreamRef.current = media;
       pcRef.current = pc;
