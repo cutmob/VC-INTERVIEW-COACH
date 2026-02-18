@@ -4,11 +4,11 @@ import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const included = [
-  "7-minute realtime voice session",
-  "VC-style interrogation prompt",
-  "Immediate interruptions and direct pushback",
-  "No account required",
-  "Token expires in 24 hours",
+  "Stops you the moment investors would lose interest",
+  "Exposes weak traction, shaky unit economics, and vague asks",
+  "Pressure-tests your story like a real VC would",
+  "No account needed — one key, one session",
+  "No recordings. Key expires in 24 hours, then it's gone.",
 ];
 
 export default function PricingPage() {
@@ -27,10 +27,10 @@ export default function PricingPage() {
               Pricing
             </p>
             <h1 className="heading-display text-3xl text-wood-900 sm:text-5xl lg:text-6xl dark:text-wood-900">
-              One session. One key.
+              Your next investor meeting<br className="hidden sm:block" /> is worth more than $12.
             </h1>
             <p className="mt-5 text-lg text-wood-600 dark:text-wood-600">
-              No subscriptions. No accounts. Pay once and get 7 minutes of live pressure.
+              One brutal session. No account. No subscription. Just the 7 minutes that tell you exactly where your pitch breaks.
             </p>
           </div>
 
@@ -46,19 +46,10 @@ export default function PricingPage() {
                 style={{ background: "linear-gradient(90deg, transparent, rgba(196,122,74,0.6), transparent)" }}
               />
 
-              <div className="mb-8 flex items-start justify-between border-b border-wood-200 pb-8 dark:border-white/[0.07]">
-                <div>
-                  <h2 className="heading-sans text-lg text-wood-900 dark:text-wood-900">
-                    Pitch Interrogation
-                  </h2>
-                  <p className="mt-1 text-sm text-wood-600 dark:text-[#6B6360]">
-                    Single-use key &middot; 24-hour expiry
-                  </p>
-                </div>
-                <div className="text-right">
-                  <span className="font-display text-4xl font-bold text-wood-900 dark:text-wood-900">$12</span>
-                  <p className="font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">one time</p>
-                </div>
+              <div className="mb-8 flex flex-col items-center border-b border-wood-200 pb-8 dark:border-white/[0.07]">
+                <p className="mb-2 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">Find out if investors would pass — before they do.</p>
+                <span className="font-display text-5xl font-bold text-wood-900 dark:text-wood-900">$12</span>
+                <p className="mt-1 font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">one time</p>
               </div>
 
               <ul className="mb-8 space-y-3">
@@ -70,10 +61,14 @@ export default function PricingPage() {
                 ))}
               </ul>
 
-              <CtaButton label="Buy Access Key — $12" />
+              <p className="mb-5 text-center text-sm text-wood-600 dark:text-wood-600">
+                Most founders spend $500+ on pitch coaching. This is the hardest 7 minutes of feedback for the price of lunch.
+              </p>
+
+              <CtaButton label="Start Session — $12" />
 
               <p className="mt-5 text-center font-mono text-[10px] text-wood-500 dark:text-[#524E4B]">
-                Secure checkout via Stripe
+                Secure checkout via Stripe &middot; No subscription, ever
               </p>
             </SpotlightCard>
           </div>

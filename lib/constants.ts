@@ -22,7 +22,7 @@ export const UPLOAD_MAX_SIZE_MB = 20;
 /** Session creation parameters tuned for a rapid-fire VC interrogation */
 export const SESSION_CONFIG = {
   temperature: 0.7,
-  max_output_tokens: 150,
+  max_response_output_tokens: 150,
   turn_detection: {
     type: "semantic_vad" as const,
     eagerness: "high" as const,

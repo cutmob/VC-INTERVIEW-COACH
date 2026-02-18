@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ShimmerButton from "@/components/ui/shimmer-button";
 
-export function CtaButton({ label = "$12 — Buy Access Key" }: { label?: string }) {
+export function CtaButton({ label = "Start Session — $12" }: { label?: string }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

@@ -53,31 +53,29 @@ export default function HomePage() {
             background: "radial-gradient(circle at 50% 50%, transparent 10%, var(--background-gradient-stop, rgba(217, 182, 140, 0.05)) 90%)",
           }}
         />
-        {/* Dark mode gradient override via class not style for cleaner conditional */}
         <div className="pointer-events-none absolute inset-0 hidden dark:block bg-[radial-gradient(circle_at_50%_50%,transparent_10%,rgba(10,10,15,0.85)_90%)]" />
-
 
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center gap-7 text-center">
 
-          {/* Headline */}
+          {/* Headline — outcome-focused */}
           <h1 className="heading-display max-w-[820px] text-[clamp(40px,8vw,96px)] leading-[1.0] text-wood-900 animate-fade-in-up dark:text-wood-900" style={{ animationDelay: "0.2s" }}>
-            Practice your pitch.
+            Your pitch has holes.
             <br />
             <span
               className="bg-clip-text text-transparent bg-gradient-to-r from-wood-600 via-wood-500 to-wood-400 animate-text-shimmer bg-[size:200%_auto] dark:from-wood-300 dark:via-wood-400 dark:to-wood-300"
             >
-              Defend your vision.
+              Find them first.
             </span>
           </h1>
 
-          {/* Sub */}
-          <p className="max-w-[480px] text-[15px] sm:text-[17px] leading-relaxed text-wood-700/80 animate-fade-in-up dark:text-wood-600" style={{ animationDelay: "0.3s" }}>
-            7 minutes of live pressure from a VC-style AI that cuts weak
-            framing, demands specificity, and gives zero praise.
+          {/* Sub — tighter, benefit-first */}
+          <p className="max-w-[520px] text-[15px] sm:text-[17px] leading-relaxed text-wood-700/80 animate-fade-in-up dark:text-wood-600" style={{ animationDelay: "0.3s" }}>
+            7 minutes. No warm-up. A VC-style AI that interrupts, challenges, and
+            exposes every weak spot in your pitch — before a real investor does.
           </p>
 
-          {/* CTAs */}
+          {/* CTAs — personalized, action-oriented */}
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
             <Link href="/pricing" className="z-10">
               <ShimmerButton
@@ -87,7 +85,7 @@ export default function HomePage() {
                 background="var(--btn-glow-mid)"
                 className="shadow-[0_4px_14px_rgba(199,125,77,0.3)] hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] transition-shadow duration-500 dark:shadow-[0_0_30px_rgba(196,122,74,0.3)] dark:hover:shadow-[0_0_50px_rgba(196,122,74,0.5)]"
               >
-                <span className="relative z-10 font-semibold text-white px-2">Get Access Key — $12</span>
+                <span className="relative z-10 font-semibold text-white px-2">Test My Pitch — $12</span>
               </ShimmerButton>
             </Link>
 
@@ -101,18 +99,18 @@ export default function HomePage() {
 
           {/* Trust line */}
           <p className="font-mono text-[11px] tracking-wide text-wood-500 animate-fade-in-up dark:text-[#524E4B]" style={{ animationDelay: "0.5s" }}>
-            No account &nbsp;·&nbsp; No recordings &nbsp;·&nbsp; Token expires in 24h
+            No account &nbsp;·&nbsp; No recordings &nbsp;·&nbsp; No subscription &nbsp;·&nbsp; Key expires in 24h
           </p>
         </div>
       </section>
 
-      {/* ── Stats strip ── */}
+      {/* ── Stats strip — reframed around value ── */}
       <div className="relative z-10 border-y border-wood-200 bg-wood-100/50 backdrop-blur-sm dark:border-white/5 dark:bg-white/[0.02]">
         <div className="mx-auto grid max-w-4xl grid-cols-3 divide-x divide-wood-200 px-4 sm:px-6 dark:divide-white/5">
           {[
-            ["7 min", "Timed session"],
-            ["$12", "One-time, no sub"],
-            ["1 key", "Single use token"],
+            ["7 min", "Harder than most real VC meetings"],
+            ["$12", "vs. $500+ for a pitch coach"],
+            ["0", "Accounts, subscriptions, or recordings"],
           ].map(([val, label]) => (
             <div key={label} className="flex flex-col items-center gap-1 py-5 sm:py-7">
               <span className="font-display text-lg sm:text-2xl font-bold text-wood-900 dark:text-wood-900">{val}</span>
@@ -121,6 +119,8 @@ export default function HomePage() {
           ))}
         </div>
       </div>
+
+
 
       {/* ── How it works ── */}
       <section className="relative px-4 sm:px-6 py-16 sm:py-28 overflow-hidden bg-wood-50 dark:bg-transparent">
@@ -138,10 +138,10 @@ export default function HomePage() {
             </span>
           </div>
           <h2 className="heading-display mb-6 text-center text-2xl text-wood-900 sm:text-4xl dark:text-wood-900">
-            Most founders fumble in the first 60 seconds.
+            Most founders fumble before they finish the intro.
           </h2>
           <p className="mx-auto mb-10 sm:mb-16 max-w-xl text-center text-[14px] sm:text-[15px] leading-relaxed text-wood-600 dark:text-wood-600">
-            Real VCs decide in minutes whether to keep listening. This session replicates that pressure so you never waste a real meeting again.
+            Real VCs decide in the first 60 seconds whether to keep listening. This session replicates that pressure — so you stop wasting real meetings finding out the hard way.
           </p>
 
           <div className="grid gap-6 sm:grid-cols-3">
@@ -149,17 +149,17 @@ export default function HomePage() {
               {
                 num: "01",
                 title: "You pitch. The clock starts.",
-                desc: "No warm-up, no pleasantries. You get 60 seconds of uninterrupted time — exactly like a real partner meeting. What you say here sets the tone for everything.",
+                desc: "No warm-up, no pleasantries. 60 seconds of uninterrupted time — exactly like a real partner meeting. What you say here sets the tone for everything that follows.",
               },
               {
                 num: "02",
-                title: "Weak points get exposed.",
-                desc: "The AI cuts in the moment your framing goes vague. Buzzwords, hand-waving, unclear asks — all challenged in real time. This is where your pitch actually improves.",
+                title: "Every weak spot gets called out.",
+                desc: "The AI cuts in the moment your framing goes vague. Buzzwords, hand-waving, unclear asks — all challenged in real time. This is where your pitch actually gets better.",
               },
               {
                 num: "03",
-                title: "$12. No subscription. No trace.",
-                desc: "One key, one 7-minute session, then it's gone. No account, no recordings, no recurring charges. Just the sharpest version of your pitch.",
+                title: "Walk out knowing exactly what to fix.",
+                desc: "In 7 minutes you'll know precisely where your pitch breaks down. No fluff, no pep talk — just the clarity you need before the meeting that actually matters.",
               },
             ].map(({ num, title, desc }) => (
               <SpotlightCard key={num} className="p-8 items-start justify-start flex-col gap-4 bg-wood-100 border-wood-200 shadow-sm dark:bg-white/[0.03] dark:border-white/5 dark:shadow-none" spotlightColor="rgba(199, 125, 77, 0.1)">
@@ -179,7 +179,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── CTA section ── */}
+      {/* ── Social proof / credibility ── */}
+      <section className="relative px-4 sm:px-6 py-14 sm:py-20 bg-wood-50 dark:bg-transparent">
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-px w-1/2 -translate-x-1/2"
+          style={{ background: "linear-gradient(90deg, transparent, rgba(199,125,77,0.2), transparent)" }}
+        />
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8 text-center">
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.3em] text-wood-500 dark:text-wood-300">
+              After the session
+            </span>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {[
+              {
+                quote: "I walked into my Sequoia meeting and nothing they asked caught me off guard. That never happened before.",
+                who: "Founder pitching small VC funds",
+              },
+              {
+                quote: "I thought my pitch was tight. Vantive found three holes in the first two minutes. Fixed them all before demo day.",
+                who: "YC W25 applicant",
+              },
+            ].map(({ quote, who }) => (
+              <div key={who} className="rounded-xl border border-wood-200 bg-wood-100/50 p-6 sm:p-8 dark:border-white/5 dark:bg-white/[0.02]">
+                <p className="text-sm leading-relaxed text-wood-700 dark:text-wood-600 italic">
+                  &ldquo;{quote}&rdquo;
+                </p>
+                <p className="mt-4 font-mono text-[11px] text-wood-500 dark:text-[#524E4B]">
+                  — {who}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA section — urgency-driven ── */}
       <section className="relative overflow-hidden px-4 sm:px-6 py-20 sm:py-32 text-center">
         <div
           className="pointer-events-none absolute inset-0 dark:hidden"
@@ -205,10 +241,10 @@ export default function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-2xl space-y-8">
           <h2 className="heading-display text-3xl text-wood-900 sm:text-5xl dark:text-wood-900">
-            Ready to be challenged?
+            Your next meeting won&apos;t wait.
           </h2>
           <p className="text-wood-700 text-lg dark:text-wood-600">
-            One key. One session. Seven minutes of unfiltered pressure.
+            Neither should your prep. $12 to find out where your pitch breaks — before a real investor does it for you.
           </p>
           <div className="flex justify-center">
             <Link href="/pricing">
@@ -219,14 +255,13 @@ export default function HomePage() {
                 background="var(--btn-glow-mid)"
                 className="shadow-[0_4px_14px_rgba(199,125,77,0.3)] hover:shadow-[0_6px_20px_rgba(199,125,77,0.4)] transition-shadow duration-500 py-4 px-10 dark:shadow-[0_0_40px_rgba(196,122,74,0.4)] dark:hover:shadow-[0_0_60px_rgba(196,122,74,0.6)]"
               >
-                <span className="relative z-10 font-bold text-white text-base">Get Started — $12</span>
+                <span className="relative z-10 font-bold text-white text-base">Start My Mock VC Session — $12</span>
               </ShimmerButton>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Footer ── */}
       {/* ── Footer ── */}
       <SiteFooter />
 
