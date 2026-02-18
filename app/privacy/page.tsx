@@ -68,7 +68,14 @@ export default function PrivacyPage() {
             title: "6. Questions",
             content: (
                 <p>
-                    Since we do not store user data, we cannot modify or &quot;delete&quot; your account because no account exists. If you have questions about our minimal data practices, please contact us.
+                    Since we do not store user data, we cannot modify or &quot;delete&quot; your account because no account exists. If you have questions about our minimal data practices, please{" "}
+                    <a
+                        href="/contact"
+                        className="text-wood-600 hover:text-wood-900 dark:text-wood-400 dark:hover:text-wood-200 underline transition"
+                    >
+                        contact us
+                    </a>
+                    .
                 </p>
             ),
         },

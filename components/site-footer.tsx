@@ -30,7 +30,12 @@ export function SiteFooter() {
                     >
                         Privacy Policy
                     </Link>
-
+                    <Link
+                        href="/contact"
+                        className="text-wood-600 transition hover:text-wood-900 dark:text-wood-500 dark:hover:text-wood-300"
+                    >
+                        Contact
+                    </Link>
                 </div>
 
                 {/* Copyright / Info */}

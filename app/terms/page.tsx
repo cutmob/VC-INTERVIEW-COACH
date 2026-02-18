@@ -73,6 +73,22 @@ export default function TermsPage() {
                 </p>
             ),
         },
+        {
+            id: "contact",
+            title: "8. Contact & Support",
+            content: (
+                <p>
+                    For questions about these Terms of Service, technical support, or other inquiries, please contact us at{" "}
+                    <a
+                        href="mailto:support@driftrail.com"
+                        className="text-wood-600 hover:text-wood-900 dark:text-wood-400 dark:hover:text-wood-200 underline transition"
+                    >
+                        support@driftrail.com
+                    </a>
+                    .
+                </p>
+            ),
+        },
     ];
 
     return (
