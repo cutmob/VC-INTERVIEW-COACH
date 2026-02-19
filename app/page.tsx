@@ -21,9 +21,6 @@ export default function HomePage() {
             </span>
           </Link>
           <nav className="flex items-center gap-2 sm:gap-5 text-sm font-medium">
-            <Link href="/pricing" className="text-wood-600 transition hover:text-wood-900 dark:text-wood-600 dark:hover:text-wood-900">
-              Pricing
-            </Link>
             {/* Mobile: plain bordered pill with glow trace, matching SiteShell nav */}
             <span className="glow-btn-wrap sm:hidden">
               <Link

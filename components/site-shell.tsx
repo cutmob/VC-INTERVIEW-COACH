@@ -12,9 +12,6 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </span>
         </Link>
         <nav className="flex items-center gap-1.5 sm:gap-5 text-xs sm:text-sm font-medium">
-          <Link href="/pricing" className="px-2 py-1.5 sm:px-0 sm:py-0 text-wood-600 transition hover:text-wood-900">
-            Pricing
-          </Link>
           <span className="glow-btn-wrap">
             <Link
               href="/session"
