@@ -142,44 +142,44 @@
   .glow-btn-wrap {
     position: relative;
     border-radius: 9999px;
-    padding: 2px;
+    padding: 1px;
   }
 
   .glow-btn-wrap::before {
+    content: "";
+    position: absolute;
+    inset: 0px;
+    border-radius: 9999px;
+    background: conic-gradient(from var(--angle, 0deg),
+        transparent 0%,
+        transparent 42%,
+        var(--btn-glow-start) 50%,
+        var(--btn-glow-mid) 54%,
+        var(--btn-glow-end) 58%,
+        transparent 66%,
+        transparent 100%);
+    animation: spin-glow 2.4s linear infinite;
+    z-index: 0;
+    filter: blur(1px);
+    opacity: 0.55;
+  }
+
+  .glow-btn-wrap::after {
     content: "";
     position: absolute;
     inset: -1px;
     border-radius: 9999px;
     background: conic-gradient(from var(--angle, 0deg),
         transparent 0%,
-        transparent 40%,
-        var(--btn-glow-start) 50%,
-        var(--btn-glow-mid) 55%,
-        var(--btn-glow-end) 60%,
-        transparent 70%,
+        transparent 46%,
+        var(--btn-glow-mid) 54%,
+        var(--btn-glow-start) 58%,
+        transparent 65%,
         transparent 100%);
     animation: spin-glow 2.4s linear infinite;
     z-index: 0;
-    filter: blur(2px);
-    opacity: 0.75;
-  }
-
-  .glow-btn-wrap::after {
-    content: "";
-    position: absolute;
-    inset: -2px;
-    border-radius: 9999px;
-    background: conic-gradient(from var(--angle, 0deg),
-        transparent 0%,
-        transparent 45%,
-        var(--btn-glow-mid) 55%,
-        var(--btn-glow-start) 60%,
-        transparent 68%,
-        transparent 100%);
-    animation: spin-glow 2.4s linear infinite;
-    z-index: 0;
-    filter: blur(4px);
-    opacity: 0.35;
+    filter: blur(2.5px);
+    opacity: 0.2;
   }
 
   .glow-btn-inner {

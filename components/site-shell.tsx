@@ -11,14 +11,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             Vantive
           </span>
         </Link>
-        <nav className="flex items-center gap-2 sm:gap-5 text-sm font-medium">
-          <Link href="/pricing" className="text-wood-600 transition hover:text-wood-900">
+        <nav className="flex items-center gap-1.5 sm:gap-5 text-xs sm:text-sm font-medium">
+          <Link href="/pricing" className="px-2 py-1.5 sm:px-0 sm:py-0 text-wood-600 transition hover:text-wood-900">
             Pricing
           </Link>
           <span className="glow-btn-wrap">
             <Link
               href="/session"
-              className="glow-btn-inner border border-wood-200 px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium text-wood-800 transition hover:text-wood-900 hover:bg-wood-100 dark:border-white/10 dark:text-wood-800 dark:hover:text-wood-900 dark:hover:bg-white/5"
+              className="glow-btn-inner border border-wood-200 px-2.5 sm:px-4 py-1 sm:py-1.5 text-xs sm:text-sm font-medium text-wood-800 transition hover:text-wood-900 hover:bg-wood-100 dark:border-white/10 dark:text-wood-800 dark:hover:text-wood-900 dark:hover:bg-white/5"
             >
               Enter Session
             </Link>

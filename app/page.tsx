@@ -24,8 +24,18 @@ export default function HomePage() {
             <Link href="/pricing" className="text-wood-600 transition hover:text-wood-900 dark:text-wood-600 dark:hover:text-wood-900">
               Pricing
             </Link>
-            <Link href="/session" className="overflow-hidden rounded-full">
-              <ShimmerButton className="h-8 px-3 sm:px-5 py-1 text-xs shadow-sm dark:shadow-none overflow-hidden" shimmerColor="var(--btn-glow-start)" shimmerSize="2px" borderRadius="100px" background="var(--btn-bg)">
+            {/* Mobile: plain bordered pill with glow trace, matching SiteShell nav */}
+            <span className="glow-btn-wrap sm:hidden">
+              <Link
+                href="/session"
+                className="glow-btn-inner border border-wood-200 px-2.5 py-1 text-xs font-medium text-wood-800 transition hover:text-wood-900 hover:bg-wood-100 dark:border-white/10 dark:text-wood-800 dark:hover:text-wood-900 dark:hover:bg-white/5"
+              >
+                Enter Session
+              </Link>
+            </span>
+            {/* sm+: shimmer button */}
+            <Link href="/session" className="hidden sm:block overflow-hidden rounded-full">
+              <ShimmerButton className="h-8 px-5 py-1 text-xs shadow-sm dark:shadow-none overflow-hidden" shimmerColor="var(--btn-glow-start)" shimmerSize="2px" borderRadius="100px" background="var(--btn-bg)">
                 <span className="relative z-10 text-wood-900 group-hover:text-wood-700 transition-colors dark:text-wood-800 dark:group-hover:text-wood-900">Enter Session</span>
               </ShimmerButton>
             </Link>
