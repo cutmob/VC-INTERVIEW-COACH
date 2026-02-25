@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { auditLog } from "@/lib/audit-log";
-import { generateToken, hasWebhookBeenProcessed, markWebhookProcessed, saveToken } from "@/lib/token";
+import { generateToken, hasWebhookBeenProcessed, markWebhookProcessed, saveToken, deleteToken } from "@/lib/token";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "", {
   apiVersion: "2025-02-24.acacia"
@@ -47,6 +47,35 @@ export async function POST(req: NextRequest) {
     });
 
     auditLog("token.generated", { stripeSessionId: session.id, tokenPrefix: token.slice(0, 7) });
+  }
+
+  // Handle refunds - invalidate the token
+  if (event.type === "charge.refunded") {
+    const charge = event.data.object as Stripe.Charge;
+    
+    // Find the checkout session associated with this charge
+    if (charge.metadata?.token) {
+      await deleteToken(charge.metadata.token);
+      auditLog("token.refunded", { chargeId: charge.id, tokenPrefix: charge.metadata.token.slice(0, 7) });
+    } else {
+      // Try to find via payment intent
+      const paymentIntentId = typeof charge.payment_intent === 'string' 
+        ? charge.payment_intent 
+        : charge.payment_intent?.id;
+      
+      if (paymentIntentId) {
+        const sessions = await stripe.checkout.sessions.list({
+          payment_intent: paymentIntentId,
+          limit: 1
+        });
+        
+        if (sessions.data.length > 0 && sessions.data[0].metadata?.token) {
+          const token = sessions.data[0].metadata.token;
+          await deleteToken(token);
+          auditLog("token.refunded", { chargeId: charge.id, tokenPrefix: token.slice(0, 7) });
+        }
+      }
+    }
   }
 
   await markWebhookProcessed(event.id);

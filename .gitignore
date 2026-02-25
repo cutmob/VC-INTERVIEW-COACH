@@ -3,3 +3,24 @@ node_modules
 .env
 .env.local
 .env*.local
+
+# Keep only essential files for open source
+# Ignore everything except documentation and license
+/*
+!/README.md
+!/USER_GUIDE.md
+!/QUICK_START.md
+!/LICENSE
+!/LICENSE.md
+!/COMMERCIAL_LICENSE.md
+!/CONTRIBUTING.md
+!/SECURITY.md
+!/.gitignore
+!/.env.example
+!/package.json
+!/package-lock.json
+
+# Ignore legal pages (customize for your use)
+/app/terms/
+/app/privacy/
+/app/contact/

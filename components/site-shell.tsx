@@ -8,7 +8,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <header className="mb-8 sm:mb-12 flex items-center justify-between">
         <Link href="/" className="flex items-baseline gap-1.5 sm:gap-2">
           <span className="font-display text-[15px] sm:text-[17px] font-bold tracking-tight text-wood-900">
-            Vantive
+            PitchCoach
           </span>
         </Link>
         <nav className="flex items-center gap-1.5 sm:gap-5 text-xs sm:text-sm font-medium">

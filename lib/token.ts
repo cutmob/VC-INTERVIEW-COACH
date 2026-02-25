@@ -37,6 +37,10 @@ export async function setTokenConsumed(token: string, value: SessionToken) {
   await getRedis().set(`token:${token}`, JSON.stringify(value));
 }
 
+export async function deleteToken(token: string): Promise<void> {
+  await getRedis().del(`token:${token}`);
+}
+
 export async function hasWebhookBeenProcessed(id: string): Promise<boolean> {
   const val = await getRedis().get(`webhook:${id}`);
   return val === "1";

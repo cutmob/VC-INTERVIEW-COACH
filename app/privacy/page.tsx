@@ -7,7 +7,7 @@ export default function PrivacyPage() {
             title: "1. Data Collection Philosophy",
             content: (
                 <p>
-                    At Vantive, we believe data minimization is the ultimate privacy protection. We do not maintain user accounts, databases, or persistent profiles. We collect only the minimum data necessary to process your transaction and facilitate a single AI coaching session.
+                    At PitchCoach, we believe data minimization is the ultimate privacy protection. We do not maintain user accounts, databases, or persistent profiles. We collect only the minimum data necessary to process your transaction and facilitate a single AI coaching session.
                 </p>
             ),
         },
@@ -26,7 +26,7 @@ export default function PrivacyPage() {
             content: (
                 <div className="space-y-4">
                     <p>
-                        Vantive sessions are realtime and ephemeral by design.
+                        PitchCoach sessions are realtime and ephemeral by design.
                     </p>
                     <ul className="list-disc pl-5 space-y-2">
                         <li>We do not record audio of your pitch.</li>

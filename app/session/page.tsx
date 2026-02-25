@@ -45,6 +45,7 @@ function SessionInner() {
   const countdownRef = useRef<number | null>(null);
   const remoteAudioRef = useRef<HTMLAudioElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const userSpeakingStartRef = useRef<number | null>(null);
 
   const endSession = useCallback((showComplete = true) => {
     const hadActiveSession = pcRef.current !== null;
@@ -62,6 +63,7 @@ function SessionInner() {
     }
     setUploadStatus(null);
     setDragOver(false);
+    userSpeakingStartRef.current = null;
   }, []);
 
   useEffect(() => () => endSession(false), [endSession]);
@@ -170,6 +172,27 @@ function SessionInner() {
 
       const dc = pc.createDataChannel("oai-events");
       dcRef.current = dc;
+
+      // Listen for conversation events - infrastructure for AI-driven interruption
+      dc.onmessage = (event) => {
+        try {
+          const msg = JSON.parse(event.data);
+          
+          // Track user speaking state (for potential future use)
+          if (msg.type === "input_audio_buffer.speech_started") {
+            userSpeakingStartRef.current = Date.now();
+          }
+          
+          if (msg.type === "input_audio_buffer.speech_stopped") {
+            userSpeakingStartRef.current = null;
+          }
+
+          // The AI will naturally interrupt based on semantic_vad + system prompt
+          // No client-side interruption triggers - let the AI decide based on content
+        } catch (err) {
+          // Ignore parse errors
+        }
+      };
 
       pc.ontrack = (event) => {
         const el = remoteAudioRef.current;

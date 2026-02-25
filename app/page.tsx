@@ -17,7 +17,7 @@ export default function HomePage() {
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <Link href="/" className="flex items-baseline gap-1.5 sm:gap-2">
             <span className="font-display text-[15px] sm:text-[17px] font-bold tracking-tight text-wood-900 dark:text-wood-900">
-              Vantive
+              PitchCoach
             </span>
           </Link>
           <nav className="flex items-center gap-2 sm:gap-5 text-sm font-medium">
@@ -207,7 +207,7 @@ export default function HomePage() {
                 who: "Founder pitching small VC funds",
               },
               {
-                quote: "I thought my pitch was tight. Vantive found three holes in the first two minutes. Fixed them all before demo day.",
+                quote: "I thought my pitch was tight. PitchCoach found three holes in the first two minutes. Fixed them all before demo day.",
                 who: "YC W25 applicant",
               },
             ].map(({ quote, who }) => (

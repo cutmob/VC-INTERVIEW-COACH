@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { VantiveLogo } from "@/components/icons/vantive-logo";
+import { PitchCoachLogo } from "@/components/icons/pitchcoach-logo";
 
 export function SiteFooter() {
     return (
@@ -12,10 +12,10 @@ export function SiteFooter() {
                     {/* Brand */}
                     <Link href="/" className="group flex items-center gap-2.5">
                         <div className="h-7 w-7 overflow-hidden rounded-full transition-opacity group-hover:opacity-80">
-                            <VantiveLogo className="h-full w-full" />
+                            <PitchCoachLogo className="h-full w-full" />
                         </div>
                         <span className="font-display text-sm font-bold text-wood-800 dark:text-wood-700">
-                            Vantive
+                            PitchCoach
                         </span>
                     </Link>
 
@@ -28,26 +28,14 @@ export function SiteFooter() {
                             Pricing
                         </Link>
                         <span className="h-3 w-px bg-wood-200 dark:bg-white/10" aria-hidden="true" />
-                        <Link
-                            href="/terms"
+                        <a
+                            href="https://github.com/cutmob/pitchcoach"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-wood-500 transition hover:text-wood-800 dark:text-wood-600 dark:hover:text-wood-300"
                         >
-                            Terms
-                        </Link>
-                        <span className="h-3 w-px bg-wood-200 dark:bg-white/10" aria-hidden="true" />
-                        <Link
-                            href="/privacy"
-                            className="text-wood-500 transition hover:text-wood-800 dark:text-wood-600 dark:hover:text-wood-300"
-                        >
-                            Privacy
-                        </Link>
-                        <span className="h-3 w-px bg-wood-200 dark:bg-white/10" aria-hidden="true" />
-                        <Link
-                            href="/contact"
-                            className="text-wood-500 transition hover:text-wood-800 dark:text-wood-600 dark:hover:text-wood-300"
-                        >
-                            Contact
-                        </Link>
+                            GitHub
+                        </a>
                     </nav>
                 </div>
 
@@ -57,7 +45,7 @@ export function SiteFooter() {
                         No accounts · No saved data · Key valid for 24 hours
                     </p>
                     <p className="font-mono text-[10px] text-wood-400 dark:text-[#2C2A29]">
-                        © {new Date().getFullYear()} Vantive
+                        © {new Date().getFullYear()} PitchCoach
                     </p>
                 </div>
             </div>

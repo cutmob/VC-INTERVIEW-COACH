@@ -7,7 +7,7 @@ export default function TermsPage() {
             title: "1. Acceptance of Terms",
             content: (
                 <p>
-                    By accessing or using Vantive (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. Vantive provides an AI-powered pitch coaching session designed to simulate a venture capital interrogation.
+                    By accessing or using PitchCoach (&ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services. PitchCoach provides an AI-powered pitch coaching session designed to simulate a venture capital interrogation.
                 </p>
             ),
         },
@@ -16,7 +16,7 @@ export default function TermsPage() {
             title: "2. Description of Services",
             content: (
                 <p>
-                    Vantive offers realtime voice sessions with an AI coach. Services are provided on a &ldquo;pay-per-session&rdquo; basis with single-use access keys. We do not require account registration, and we do not maintain persistent user profiles. Each session is ephemeral and self-contained.
+                    PitchCoach offers realtime voice sessions with an AI coach. Services are provided on a &ldquo;pay-per-session&rdquo; basis with single-use access keys. We do not require account registration, and we do not maintain persistent user profiles. Each session is ephemeral and self-contained.
                 </p>
             ),
         },
@@ -42,7 +42,7 @@ export default function TermsPage() {
             title: "4. Third-Party AI Integration",
             content: (
                 <p>
-                    Vantive utilizes OpenAI&apos;s API to generate responses. By using our service, you acknowledge that your voice and text inputs are processed by OpenAI. While we configure our usage to maximize privacy (opting out of training where applicable for enterprise endpoints), OpenAI has its own terms and policies which govern their data handling. We encourage you to review OpenAI&apos;s policies linked below.
+                    PitchCoach utilizes OpenAI&apos;s API to generate responses. By using our service, you acknowledge that your voice and text inputs are processed by OpenAI. While we configure our usage to maximize privacy (opting out of training where applicable for enterprise endpoints), OpenAI has its own terms and policies which govern their data handling. We encourage you to review OpenAI&apos;s policies linked below.
                 </p>
             ),
         },
@@ -60,7 +60,7 @@ export default function TermsPage() {
             title: "6. Limitation of Liability",
             content: (
                 <p>
-                    To the maximum extent permitted by law, Vantive shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly. Our total liability for any claim arising out of or relating to these terms or our services is limited to the amount you paid us for the specific session key giving rise to the claim.
+                    To the maximum extent permitted by law, PitchCoach shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly. Our total liability for any claim arising out of or relating to these terms or our services is limited to the amount you paid us for the specific session key giving rise to the claim.
                 </p>
             ),
         },
@@ -80,10 +80,10 @@ export default function TermsPage() {
                 <p>
                     For questions about these Terms of Service, technical support, or other inquiries, please contact us at{" "}
                     <a
-                        href="mailto:support@driftrail.com"
+                        href="mailto:support@example.com"
                         className="text-wood-600 hover:text-wood-900 dark:text-wood-400 dark:hover:text-wood-200 underline transition"
                     >
-                        support@driftrail.com
+                        support@example.com
                     </a>
                     .
                 </p>

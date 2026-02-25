@@ -1,6 +1,7 @@
 export type AuditEvent =
   | "checkout.session.completed"
   | "token.generated"
+  | "token.refunded"
   | "session.start"
   | "session.denied"
   | "rate_limited";
