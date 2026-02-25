@@ -75,9 +75,6 @@ Pricing is based on:
 ### Q: Can I use this internally at my company?
 **A:** Yes! If you're only using it internally (not providing it as a service to external users), AGPL doesn't require you to share your code.
 
-### Q: What about the Stripe integration?
-**A:** The Stripe integration code is part of this project and follows the same dual license. However, you'll need your own Stripe account and API keys.
-
 ### Q: Can I fork this and change the license?
 **A:** No. You must maintain the AGPL-3.0+ license on any forks or derivatives unless you obtain a commercial license from the copyright holder.
 
