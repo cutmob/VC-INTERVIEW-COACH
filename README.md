@@ -1,20 +1,20 @@
 # PitchCoach
 
-A lightweight Next.js 14 application demonstrating a production-ready Stripe payment integration with OpenAI Realtime API for paid voice sessions.
+AI-powered VC interview coach using OpenAI Realtime API. Practice your startup pitch with a relentless AI partner that interrupts vague answers and challenges weak claims.
 
 > **📜 Dual Licensed:** AGPL-3.0+ (open source) / Commercial (proprietary use)  
 > Free for open source projects. [Commercial licenses available](COMMERCIAL_LICENSE.md) for proprietary SaaS products.
 
 ## Why This Project?
 
-This project showcases a clean, minimal implementation of:
-- **Stripe Checkout** → **Webhook** → **Token Generation** flow
-- Secure API key delivery after purchase (no keys stored in database)
-- OpenAI Realtime API integration with WebRTC
-- Rate limiting, audit logging, and webhook deduplication
-- Redis-backed token storage with Netlify Blobs fallback
+This project showcases:
+- **OpenAI Realtime API** integration with WebRTC for voice sessions
+- **Webhook-driven token generation** - Secure API key delivery after purchase
+- **Production-ready architecture** - Rate limiting, audit logging, webhook deduplication
+- **Optional payments** - Stripe integration that can be disabled
+- **Clean, minimal code** - Easy to understand and customize
 
-The Stripe implementation is intentionally lightweight and reusable for any "pay-per-use" API key or session-based product.
+Perfect for learning modern web development patterns or building your own AI coaching platform.
 
 ## Product Flow
 
